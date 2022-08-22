@@ -9,21 +9,35 @@
 /* Begin PBXBuildFile section */
 		04CF217A28B37E550016BBCA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF217928B37E550016BBCA /* AppDelegate.swift */; };
 		04CF217C28B37E550016BBCA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF217B28B37E550016BBCA /* SceneDelegate.swift */; };
-		04CF217E28B37E550016BBCA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF217D28B37E550016BBCA /* ViewController.swift */; };
-		04CF218128B37E550016BBCA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04CF217F28B37E550016BBCA /* Main.storyboard */; };
 		04CF218328B37E560016BBCA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04CF218228B37E560016BBCA /* Assets.xcassets */; };
 		04CF218628B37E560016BBCA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04CF218428B37E560016BBCA /* LaunchScreen.storyboard */; };
+		04CF21C228B3B6690016BBCA /* Mark-Pro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04CF21BF28B3B6690016BBCA /* Mark-Pro-Bold.ttf */; };
+		04CF21C328B3B6690016BBCA /* Mark-Pro.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04CF21C028B3B6690016BBCA /* Mark-Pro.ttf */; };
+		04CF21C428B3B6690016BBCA /* MarkPro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04CF21C128B3B6690016BBCA /* MarkPro-Medium.ttf */; };
+		04CF21D528B3CABF0016BBCA /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21D428B3CABF0016BBCA /* MainScreenView.swift */; };
+		04CF21D728B3CCA70016BBCA /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21D628B3CCA70016BBCA /* MainScreenPresenter.swift */; };
+		04CF21D928B3CDBB0016BBCA /* MainScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21D828B3CDBB0016BBCA /* MainScreenInteractor.swift */; };
+		04CF21DB28B3D83B0016BBCA /* MainScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21DA28B3D83B0016BBCA /* MainScreenRouter.swift */; };
+		04CF21DE28B402B60016BBCA /* MainModulebuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21DD28B402B60016BBCA /* MainModulebuilder.swift */; };
+		04CF21E028B408480016BBCA /* MainScreenView + SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21DF28B408480016BBCA /* MainScreenView + SetupUI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		04CF217628B37E550016BBCA /* ecommerce-concept.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ecommerce-concept.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		04CF217928B37E550016BBCA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04CF217B28B37E550016BBCA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		04CF217D28B37E550016BBCA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		04CF218028B37E550016BBCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04CF218228B37E560016BBCA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		04CF218528B37E560016BBCA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04CF218728B37E560016BBCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04CF21BF28B3B6690016BBCA /* Mark-Pro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mark-Pro-Bold.ttf"; sourceTree = "<group>"; };
+		04CF21C028B3B6690016BBCA /* Mark-Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Mark-Pro.ttf"; sourceTree = "<group>"; };
+		04CF21C128B3B6690016BBCA /* MarkPro-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MarkPro-Medium.ttf"; sourceTree = "<group>"; };
+		04CF21D428B3CABF0016BBCA /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		04CF21D628B3CCA70016BBCA /* MainScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
+		04CF21D828B3CDBB0016BBCA /* MainScreenInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenInteractor.swift; sourceTree = "<group>"; };
+		04CF21DA28B3D83B0016BBCA /* MainScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenRouter.swift; sourceTree = "<group>"; };
+		04CF21DD28B402B60016BBCA /* MainModulebuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModulebuilder.swift; sourceTree = "<group>"; };
+		04CF21DF28B408480016BBCA /* MainScreenView + SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainScreenView + SetupUI.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +70,182 @@
 		04CF217828B37E550016BBCA /* ecommerce-concept */ = {
 			isa = PBXGroup;
 			children = (
+				04CF21DC28B4029A0016BBCA /* ModuleBuilder */,
+				04CF21BE28B3B62D0016BBCA /* Fonts */,
+				04CF21BD28B3A5620016BBCA /* MyCartModule */,
+				04CF21BC28B3A5450016BBCA /* ProductDetailsModule */,
+				04CF21BB28B3A4E90016BBCA /* MainScreenModule */,
 				04CF217928B37E550016BBCA /* AppDelegate.swift */,
 				04CF217B28B37E550016BBCA /* SceneDelegate.swift */,
-				04CF217D28B37E550016BBCA /* ViewController.swift */,
-				04CF217F28B37E550016BBCA /* Main.storyboard */,
 				04CF218228B37E560016BBCA /* Assets.xcassets */,
 				04CF218428B37E560016BBCA /* LaunchScreen.storyboard */,
 				04CF218728B37E560016BBCA /* Info.plist */,
 			);
 			path = "ecommerce-concept";
+			sourceTree = "<group>";
+		};
+		04CF21BB28B3A4E90016BBCA /* MainScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				04CF21D328B3C9FC0016BBCA /* Router */,
+				04CF21D228B3C9F00016BBCA /* Entity */,
+				04CF21D128B3C9EB0016BBCA /* Presenter */,
+				04CF21D028B3C9E70016BBCA /* View */,
+				04CF21CF28B3C9E20016BBCA /* Interactor */,
+			);
+			path = MainScreenModule;
+			sourceTree = "<group>";
+		};
+		04CF21BC28B3A5450016BBCA /* ProductDetailsModule */ = {
+			isa = PBXGroup;
+			children = (
+				04CF21CE28B3C9DC0016BBCA /* Interactor */,
+				04CF21CD28B3C9D60016BBCA /* View */,
+				04CF21CC28B3C9D00016BBCA /* Presenter */,
+				04CF21CB28B3C9C80016BBCA /* Entity */,
+				04CF21CA28B3C9C00016BBCA /* Router */,
+			);
+			path = ProductDetailsModule;
+			sourceTree = "<group>";
+		};
+		04CF21BD28B3A5620016BBCA /* MyCartModule */ = {
+			isa = PBXGroup;
+			children = (
+				04CF21C928B3BA860016BBCA /* Router */,
+				04CF21C828B3BA7E0016BBCA /* Entity */,
+				04CF21C728B3BA770016BBCA /* Presenter */,
+				04CF21C628B3BA6D0016BBCA /* View */,
+				04CF21C528B3BA550016BBCA /* Interactor */,
+			);
+			path = MyCartModule;
+			sourceTree = "<group>";
+		};
+		04CF21BE28B3B62D0016BBCA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				04CF21BF28B3B6690016BBCA /* Mark-Pro-Bold.ttf */,
+				04CF21C028B3B6690016BBCA /* Mark-Pro.ttf */,
+				04CF21C128B3B6690016BBCA /* MarkPro-Medium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		04CF21C528B3BA550016BBCA /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		04CF21C628B3BA6D0016BBCA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04CF21C728B3BA770016BBCA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		04CF21C828B3BA7E0016BBCA /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		04CF21C928B3BA860016BBCA /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		04CF21CA28B3C9C00016BBCA /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		04CF21CB28B3C9C80016BBCA /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		04CF21CC28B3C9D00016BBCA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		04CF21CD28B3C9D60016BBCA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04CF21CE28B3C9DC0016BBCA /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		04CF21CF28B3C9E20016BBCA /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				04CF21D828B3CDBB0016BBCA /* MainScreenInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		04CF21D028B3C9E70016BBCA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04CF21D428B3CABF0016BBCA /* MainScreenView.swift */,
+				04CF21DF28B408480016BBCA /* MainScreenView + SetupUI.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04CF21D128B3C9EB0016BBCA /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				04CF21D628B3CCA70016BBCA /* MainScreenPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		04CF21D228B3C9F00016BBCA /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		04CF21D328B3C9FC0016BBCA /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				04CF21DA28B3D83B0016BBCA /* MainScreenRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		04CF21DC28B4029A0016BBCA /* ModuleBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				04CF21DD28B402B60016BBCA /* MainModulebuilder.swift */,
+			);
+			path = ModuleBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,9 +306,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CF21C228B3B6690016BBCA /* Mark-Pro-Bold.ttf in Resources */,
+				04CF21C328B3B6690016BBCA /* Mark-Pro.ttf in Resources */,
 				04CF218628B37E560016BBCA /* LaunchScreen.storyboard in Resources */,
 				04CF218328B37E560016BBCA /* Assets.xcassets in Resources */,
-				04CF218128B37E550016BBCA /* Main.storyboard in Resources */,
+				04CF21C428B3B6690016BBCA /* MarkPro-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,8 +321,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04CF217E28B37E550016BBCA /* ViewController.swift in Sources */,
+				04CF21D928B3CDBB0016BBCA /* MainScreenInteractor.swift in Sources */,
 				04CF217A28B37E550016BBCA /* AppDelegate.swift in Sources */,
+				04CF21D728B3CCA70016BBCA /* MainScreenPresenter.swift in Sources */,
+				04CF21E028B408480016BBCA /* MainScreenView + SetupUI.swift in Sources */,
+				04CF21DE28B402B60016BBCA /* MainModulebuilder.swift in Sources */,
+				04CF21DB28B3D83B0016BBCA /* MainScreenRouter.swift in Sources */,
+				04CF21D528B3CABF0016BBCA /* MainScreenView.swift in Sources */,
 				04CF217C28B37E550016BBCA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +335,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		04CF217F28B37E550016BBCA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				04CF218028B37E550016BBCA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		04CF218428B37E560016BBCA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +472,6 @@
 				INFOPLIST_FILE = "ecommerce-concept/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -320,7 +499,6 @@
 				INFOPLIST_FILE = "ecommerce-concept/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
