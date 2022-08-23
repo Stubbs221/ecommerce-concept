@@ -22,6 +22,8 @@ class MainScreenView: UIViewController, MainScreenViewInput {
     
     lazy var geoLabelView: UIView = {
         let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
         
         let geoIconImageView: UIImageView = {
             let imageView = UIImageView()
@@ -35,6 +37,7 @@ class MainScreenView: UIViewController, MainScreenViewInput {
             label.translatesAutoresizingMaskIntoConstraints = false
             label.text = "Zihuatanejo, Gro"
             label.font = UIFont(name: "MarkPro-Medium", size: 15)
+            label.textColor = UIColor(named: "darkBlueColor")
             return label
         }()
         
@@ -53,21 +56,44 @@ class MainScreenView: UIViewController, MainScreenViewInput {
             geoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             geoLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             geoIconImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            geoIconImageView.heightAnchor.constraint(equalToConstant: 16),
+            geoIconImageView.widthAnchor.constraint(equalToConstant: 12),
             geoIconImageView.trailingAnchor.constraint(equalTo: geoLabel.leadingAnchor, constant: -11),
             arrowDown.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            arrowDown.leadingAnchor.constraint(equalTo: geoLabel.trailingAnchor, constant: 8)])
+            arrowDown.leadingAnchor.constraint(equalTo: geoLabel.trailingAnchor, constant: 8),
+            arrowDown.widthAnchor.constraint(equalToConstant: 10),
+            arrowDown.heightAnchor.constraint(equalToConstant: 5)])
         
         return view
     }()
     
     lazy var filterButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "filterButtonIcon"), for: .normal)
+        
+        NSLayoutConstraint.activate([
+            button.heightAnchor.constraint(equalToConstant: 14),
+            button.widthAnchor.constraint(equalToConstant: 12)])
         return button
     }()
     
-    lazy var selectCategoryViewAllView: UIView = {
-        let view = UIView()
-        return view
+    lazy var selectCategoryLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Select Category"
+        label.textColor = UIColor(named: "darkBlueColor")
+        label.font = UIFont(name: "MarkPro-Bold", size: 25)
+        return label
+    }()
+    
+    lazy var viewAllLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor(named: "orangeColor")
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "view all"
+        label.font = UIFont(name: "MarkPro", size: 15)
+        return label
     }()
     
     lazy var categoryCollectionCarouselView: UICollectionView = {
