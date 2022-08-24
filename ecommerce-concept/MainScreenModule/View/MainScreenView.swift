@@ -24,6 +24,34 @@ class MainScreenView: UIViewController, MainScreenViewInput {
     
     var yOffset: CGFloat = 0
     
+    lazy var mainScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = UIColor(named: "backgroundWhiteColor")
+//        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2300)
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        
+        return scrollView
+    }()
+    
+    lazy var contentView: UIView = {
+        let contentView = UIView()
+        contentView.backgroundColor = UIColor(named: "backgroundWhiteColor")
+
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
+    
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 16
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     lazy var geoLabelView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -237,6 +265,94 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         label.text = "see more"
         label.font = UIFont(name: "MarkPro", size: 15)
         return label
+    }()
+    
+    lazy var bestSellerCollectionView: BestSellerCollectionView = {
+        let collectionView = BestSellerCollectionView()
+        return collectionView
+    }()
+    
+    lazy var customTabBar: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(named: "darkBlueColor")
+        view.layer.cornerRadius = 40
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        let dotImageView: UIImageView = {
+            let imageView = UIImageView()
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.image = UIImage(named: "roundDotIcon")
+            return imageView
+        }()
+        
+        let explorerLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Explorer"
+            label.textColor = .white
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.font = UIFont(name: "MarkPro-Bold", size: 19)
+            return label
+        }()
+        
+        let cartButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.contentMode = .scaleAspectFill
+            button.setImage(UIImage(named: "cartTabBarButton"), for: .normal)
+            return button
+        }()
+        
+        let favoriteButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.contentMode = .scaleToFill
+            button.setImage(UIImage(named: "favoriteTabBarButton"), for: .normal)
+            return button
+        }()
+        
+        let profileButton: UIButton = {
+            let button = UIButton()
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.contentMode = .scaleAspectFill
+            button.setImage(UIImage(named: "UserTabBarButton"), for: .normal)
+            return button
+        }()
+        
+        view.addSubview(dotImageView)
+        view.addSubview(explorerLabel)
+        view.addSubview(cartButton)
+        view.addSubview(favoriteButton)
+        view.addSubview(profileButton)
+        
+        NSLayoutConstraint.activate([
+            dotImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -10),
+            dotImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
+            dotImageView.widthAnchor.constraint(equalToConstant: 10),
+            dotImageView.heightAnchor.constraint(equalToConstant: 10)])
+        
+        NSLayoutConstraint.activate([
+            explorerLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -10),
+            explorerLabel.leadingAnchor.constraint(equalTo: dotImageView.trailingAnchor, constant: 10)])
+        
+        NSLayoutConstraint.activate([
+            cartButton.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -10),
+            cartButton.leadingAnchor.constraint(equalTo: explorerLabel.trailingAnchor, constant: 40),
+            cartButton.heightAnchor.constraint(equalToConstant: 20),
+            cartButton.widthAnchor.constraint(equalToConstant: 20)])
+        
+        NSLayoutConstraint.activate([
+            favoriteButton.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -10),
+            favoriteButton.leadingAnchor.constraint(equalTo: cartButton.trailingAnchor, constant: 49),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 19),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 20)])
+        
+        NSLayoutConstraint.activate([
+            profileButton.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -10),
+            profileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -65),
+            profileButton.heightAnchor.constraint(equalToConstant: 20),
+            profileButton.widthAnchor.constraint(equalToConstant: 20)])
+        
+        return view
     }()
     
    

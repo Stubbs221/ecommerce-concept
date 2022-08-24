@@ -40,7 +40,7 @@ class BestSellerCollectionView: UICollectionView, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Constants.bestSellerItemWidth, height: 230)
+        return CGSize(width: 180, height: 230)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
