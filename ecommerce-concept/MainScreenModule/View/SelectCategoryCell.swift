@@ -20,19 +20,16 @@ class SelectCategoryCell: UICollectionViewCell {
         view.backgroundColor = .white
         view.heightAnchor.constraint(equalToConstant: 80).isActive = true
         view.widthAnchor.constraint(equalToConstant: 80).isActive = true
-//        view.
         return view
     }()
     
     lazy var categoryImage: UIImageView = {
             let image = UIImageView()
-//            image.backgroundColor =  .white
-//            image.layer.cornerRadius = 35
+
         image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
             image.heightAnchor.constraint(equalToConstant: 31).isActive = true
             image.widthAnchor.constraint(equalToConstant: 31).isActive = true
-            
             return image
         }()
         
@@ -45,15 +42,7 @@ class SelectCategoryCell: UICollectionViewCell {
             return label
         }()
         
-//    override func layoutSubviews() {
-//        self.layoutSubviews()
-//
-//        self.roundView.layer.shadowRadius = 9
-//        self.roundView.layer.shadowOpacity = 0.3
-//        self.roundView.layer.shadowOffset = CGSize(width: 5, height: 8)
-//
-//        self.clipsToBounds = false
-//    }
+
 
     
     override init(frame: CGRect) {

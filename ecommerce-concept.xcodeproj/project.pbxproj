@@ -22,6 +22,8 @@
 		04CF21E028B408480016BBCA /* MainScreenView + SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21DF28B408480016BBCA /* MainScreenView + SetupUI.swift */; };
 		04CF21E328B60FC60016BBCA /* SelectCategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21E228B60FC60016BBCA /* SelectCategoryCollectionView.swift */; };
 		04CF21E528B610C20016BBCA /* SelectCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21E428B610C20016BBCA /* SelectCategoryCell.swift */; };
+		04CF21EB28B67AE20016BBCA /* BestSellerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21EA28B67AE20016BBCA /* BestSellerCollectionView.swift */; };
+		04CF21ED28B67BF40016BBCA /* BestSellerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21EC28B67BF40016BBCA /* BestSellerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		04CF21DF28B408480016BBCA /* MainScreenView + SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainScreenView + SetupUI.swift"; sourceTree = "<group>"; };
 		04CF21E228B60FC60016BBCA /* SelectCategoryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryCollectionView.swift; sourceTree = "<group>"; };
 		04CF21E428B610C20016BBCA /* SelectCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryCell.swift; sourceTree = "<group>"; };
+		04CF21EA28B67AE20016BBCA /* BestSellerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerCollectionView.swift; sourceTree = "<group>"; };
+		04CF21EC28B67BF40016BBCA /* BestSellerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestSellerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +223,8 @@
 				04CF21DF28B408480016BBCA /* MainScreenView + SetupUI.swift */,
 				04CF21E228B60FC60016BBCA /* SelectCategoryCollectionView.swift */,
 				04CF21E428B610C20016BBCA /* SelectCategoryCell.swift */,
+				04CF21EA28B67AE20016BBCA /* BestSellerCollectionView.swift */,
+				04CF21EC28B67BF40016BBCA /* BestSellerCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -331,10 +337,12 @@
 				04CF217A28B37E550016BBCA /* AppDelegate.swift in Sources */,
 				04CF21D728B3CCA70016BBCA /* MainScreenPresenter.swift in Sources */,
 				04CF21E028B408480016BBCA /* MainScreenView + SetupUI.swift in Sources */,
+				04CF21ED28B67BF40016BBCA /* BestSellerCell.swift in Sources */,
 				04CF21DE28B402B60016BBCA /* MainModulebuilder.swift in Sources */,
 				04CF21DB28B3D83B0016BBCA /* MainScreenRouter.swift in Sources */,
 				04CF21D528B3CABF0016BBCA /* MainScreenView.swift in Sources */,
 				04CF21E328B60FC60016BBCA /* SelectCategoryCollectionView.swift in Sources */,
+				04CF21EB28B67AE20016BBCA /* BestSellerCollectionView.swift in Sources */,
 				04CF217C28B37E550016BBCA /* SceneDelegate.swift in Sources */,
 				04CF21E528B610C20016BBCA /* SelectCategoryCell.swift in Sources */,
 			);
