@@ -15,6 +15,7 @@ extension MainScreenView {
         view.addSubview(filterButton)
         view.addSubview(selectCategoryLabel)
         view.addSubview(viewAllLabel)
+        view.addSubview(selectCategoryCollectionView)
         
         
         NSLayoutConstraint.activate([
@@ -35,5 +36,11 @@ extension MainScreenView {
         NSLayoutConstraint.activate([
             viewAllLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
             viewAllLabel.topAnchor.constraint(equalTo: geoLabelView.bottomAnchor, constant: 30)])
+        
+        NSLayoutConstraint.activate([
+            selectCategoryCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            selectCategoryCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            selectCategoryCollectionView.topAnchor.constraint(equalTo: selectCategoryLabel.bottomAnchor, constant: 20),
+            selectCategoryCollectionView.heightAnchor.constraint(equalToConstant: 110)])
     }
 }

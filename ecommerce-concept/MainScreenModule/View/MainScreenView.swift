@@ -96,11 +96,11 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         return label
     }()
     
-    lazy var categoryCollectionCarouselView: UICollectionView = {
-        let collectionView = UICollectionView()
-        
+    lazy var selectCategoryCollectionView: UICollectionView = {
+        let collectionView = SelectCategoryCollectionView()
         return collectionView
     }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
