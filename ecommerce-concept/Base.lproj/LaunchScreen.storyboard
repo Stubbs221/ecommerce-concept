@@ -29,7 +29,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ecommerce Concept" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBa-ws-0xB">
-                                <rect key="frame" x="170" y="408" width="170" height="80"/>
+                                <rect key="frame" x="170" y="408" width="224" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="5cx-YK-QsY"/>
                                 </constraints>
@@ -42,7 +42,7 @@
                         <color key="backgroundColor" name="darkBlueColor"/>
                         <constraints>
                             <constraint firstItem="dBa-ws-0xB" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="25S-f1-iP1"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dBa-ws-0xB" secondAttribute="trailing" constant="74" id="C2u-hc-THp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dBa-ws-0xB" secondAttribute="trailing" constant="20" id="C2u-hc-THp"/>
                             <constraint firstItem="dBa-ws-0xB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="170" id="O6j-De-Pyk"/>
                             <constraint firstItem="gC8-yn-mmS" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ZlB-KE-Bst"/>
                             <constraint firstItem="gC8-yn-mmS" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="sps-Mb-bHy"/>

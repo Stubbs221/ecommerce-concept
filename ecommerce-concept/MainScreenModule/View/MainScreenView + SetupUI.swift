@@ -47,7 +47,7 @@ extension MainScreenView {
             contentView.bottomAnchor.constraint(equalTo: mainScrollView.bottomAnchor),
             contentView.trailingAnchor.constraint(equalTo: mainScrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: mainScrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 1200)
+            contentView.heightAnchor.constraint(equalToConstant: 1250)
             ])
         
         NSLayoutConstraint.activate([

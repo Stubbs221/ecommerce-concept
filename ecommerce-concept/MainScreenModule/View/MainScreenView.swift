@@ -22,7 +22,6 @@ class MainScreenView: UIViewController, MainScreenViewInput {
     var hotSalesArray: [String] = ["Iphone", "Samsung", "Xiaomi"]
     var timer = Timer()
     
-    var yOffset: CGFloat = 0
     
     lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
