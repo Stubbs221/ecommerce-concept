@@ -40,6 +40,8 @@
 		04CF221028B7E4D60016BBCA /* MyCartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF220F28B7E4D60016BBCA /* MyCartPresenter.swift */; };
 		04CF221228B7E5CE0016BBCA /* MyCartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF221128B7E5CE0016BBCA /* MyCartView.swift */; };
 		04CF221428B7E6E90016BBCA /* MyCartInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF221328B7E6E90016BBCA /* MyCartInteractor.swift */; };
+		04CF221628B7F1EE0016BBCA /* MyCartView + SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF221528B7F1EE0016BBCA /* MyCartView + SetupUI.swift */; };
+		04CF221828B7F28F0016BBCA /* MyCartModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF221728B7F28F0016BBCA /* MyCartModuleBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +80,8 @@
 		04CF220F28B7E4D60016BBCA /* MyCartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCartPresenter.swift; sourceTree = "<group>"; };
 		04CF221128B7E5CE0016BBCA /* MyCartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCartView.swift; sourceTree = "<group>"; };
 		04CF221328B7E6E90016BBCA /* MyCartInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCartInteractor.swift; sourceTree = "<group>"; };
+		04CF221528B7F1EE0016BBCA /* MyCartView + SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyCartView + SetupUI.swift"; sourceTree = "<group>"; };
+		04CF221728B7F28F0016BBCA /* MyCartModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCartModuleBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				04CF221128B7E5CE0016BBCA /* MyCartView.swift */,
+				04CF221528B7F1EE0016BBCA /* MyCartView + SetupUI.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				04CF21DD28B402B60016BBCA /* MainModulebuilder.swift */,
 				04CF21F628B75F1D0016BBCA /* ProductDetailsModuleBuilder.swift */,
 				04CF220928B7C88F0016BBCA /* FilterModuleBuilder.swift */,
+				04CF221728B7F28F0016BBCA /* MyCartModuleBuilder.swift */,
 			);
 			path = ModuleBuilder;
 			sourceTree = "<group>";
@@ -436,6 +442,7 @@
 				04CF21D728B3CCA70016BBCA /* MainScreenPresenter.swift in Sources */,
 				04CF21F928B763FA0016BBCA /* ProductDetailsView + SetupUI.swift in Sources */,
 				04CF21E028B408480016BBCA /* MainScreenView + SetupUI.swift in Sources */,
+				04CF221628B7F1EE0016BBCA /* MyCartView + SetupUI.swift in Sources */,
 				04CF221228B7E5CE0016BBCA /* MyCartView.swift in Sources */,
 				04CF221028B7E4D60016BBCA /* MyCartPresenter.swift in Sources */,
 				04CF21ED28B67BF40016BBCA /* BestSellerCell.swift in Sources */,
@@ -453,6 +460,7 @@
 				04CF220A28B7C88F0016BBCA /* FilterModuleBuilder.swift in Sources */,
 				04CF21F128B6BE490016BBCA /* ProductDetailsView.swift in Sources */,
 				04CF21F528B6C1580016BBCA /* ProductDetailsRouter.swift in Sources */,
+				04CF221828B7F28F0016BBCA /* MyCartModuleBuilder.swift in Sources */,
 				04CF220228B7C5DA0016BBCA /* FilterView.swift in Sources */,
 				04CF217C28B37E550016BBCA /* SceneDelegate.swift in Sources */,
 				04CF220428B7C65F0016BBCA /* FilterInteractor.swift in Sources */,

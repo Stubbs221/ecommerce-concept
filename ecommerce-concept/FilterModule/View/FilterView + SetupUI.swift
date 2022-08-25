@@ -20,6 +20,7 @@ extension FilterView {
         filterHalfScreenView.addSubview(priceDropDown)
         filterHalfScreenView.addSubview(sizeDropDown)
         
+        
         NSLayoutConstraint.activate([
             filterHalfScreenView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height * 0.6 ),
             filterHalfScreenView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

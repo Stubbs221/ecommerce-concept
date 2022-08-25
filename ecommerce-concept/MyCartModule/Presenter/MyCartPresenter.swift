@@ -12,7 +12,7 @@ protocol MyCartPresenterInput {
     
 }
 
-protocol MyCartPresenterOutput: AnyObjec {
+protocol MyCartPresenterOutput: AnyObject {
     
 }
 
