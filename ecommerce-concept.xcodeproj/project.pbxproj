@@ -28,6 +28,8 @@
 		04CF21F128B6BE490016BBCA /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21F028B6BE490016BBCA /* ProductDetailsView.swift */; };
 		04CF21F328B6BF0E0016BBCA /* ProductDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21F228B6BF0E0016BBCA /* ProductDetailsPresenter.swift */; };
 		04CF21F528B6C1580016BBCA /* ProductDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21F428B6C1580016BBCA /* ProductDetailsRouter.swift */; };
+		04CF21F728B75F1D0016BBCA /* ProductDetailsModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21F628B75F1D0016BBCA /* ProductDetailsModuleBuilder.swift */; };
+		04CF21F928B763FA0016BBCA /* ProductDetailsView + SetupUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF21F828B763FA0016BBCA /* ProductDetailsView + SetupUI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		04CF21F028B6BE490016BBCA /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
 		04CF21F228B6BF0E0016BBCA /* ProductDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsPresenter.swift; sourceTree = "<group>"; };
 		04CF21F428B6C1580016BBCA /* ProductDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsRouter.swift; sourceTree = "<group>"; };
+		04CF21F628B75F1D0016BBCA /* ProductDetailsModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsModuleBuilder.swift; sourceTree = "<group>"; };
+		04CF21F828B763FA0016BBCA /* ProductDetailsView + SetupUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductDetailsView + SetupUI.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				04CF21F028B6BE490016BBCA /* ProductDetailsView.swift */,
+				04CF21F828B763FA0016BBCA /* ProductDetailsView + SetupUI.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,6 +273,7 @@
 			isa = PBXGroup;
 			children = (
 				04CF21DD28B402B60016BBCA /* MainModulebuilder.swift */,
+				04CF21F628B75F1D0016BBCA /* ProductDetailsModuleBuilder.swift */,
 			);
 			path = ModuleBuilder;
 			sourceTree = "<group>";
@@ -348,6 +354,7 @@
 				04CF21D928B3CDBB0016BBCA /* MainScreenInteractor.swift in Sources */,
 				04CF217A28B37E550016BBCA /* AppDelegate.swift in Sources */,
 				04CF21D728B3CCA70016BBCA /* MainScreenPresenter.swift in Sources */,
+				04CF21F928B763FA0016BBCA /* ProductDetailsView + SetupUI.swift in Sources */,
 				04CF21E028B408480016BBCA /* MainScreenView + SetupUI.swift in Sources */,
 				04CF21ED28B67BF40016BBCA /* BestSellerCell.swift in Sources */,
 				04CF21DE28B402B60016BBCA /* MainModulebuilder.swift in Sources */,
@@ -357,6 +364,7 @@
 				04CF21E328B60FC60016BBCA /* SelectCategoryCollectionView.swift in Sources */,
 				04CF21EF28B6BD7F0016BBCA /* ProductDetailsInteractor.swift in Sources */,
 				04CF21EB28B67AE20016BBCA /* BestSellerCollectionView.swift in Sources */,
+				04CF21F728B75F1D0016BBCA /* ProductDetailsModuleBuilder.swift in Sources */,
 				04CF21F128B6BE490016BBCA /* ProductDetailsView.swift in Sources */,
 				04CF21F528B6C1580016BBCA /* ProductDetailsRouter.swift in Sources */,
 				04CF217C28B37E550016BBCA /* SceneDelegate.swift in Sources */,
