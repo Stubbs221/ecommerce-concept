@@ -33,6 +33,10 @@ final class MainScreenPresenter {
 }
 
 extension MainScreenPresenter: MainScreenViewOutput {
+    func showProductDetailsView() {
+        
+    }
+    
     
 }
 

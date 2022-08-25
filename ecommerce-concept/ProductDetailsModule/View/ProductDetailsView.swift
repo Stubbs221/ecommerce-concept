@@ -47,6 +47,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         button.widthAnchor.constraint(equalToConstant: 40).isActive = true
         button.layer.cornerRadius = 10
         button.imageEdgeInsets = UIEdgeInsets(top: 11, left: 15, bottom: 12, right: 15)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -269,7 +270,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         let processorView: UIView = {
             let view = UIView()
             view.translatesAutoresizingMaskIntoConstraints = false
-//            view.backgroundColor = .blue
             view.heightAnchor.constraint(equalToConstant: 50).isActive = true
             view.widthAnchor.constraint(equalToConstant: 70).isActive = true
             
@@ -306,7 +306,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         let cameraView: UIView = {
             let view = UIView()
             view.translatesAutoresizingMaskIntoConstraints = false
-//            view.backgroundColor = .blue
             view.heightAnchor.constraint(equalToConstant: 50).isActive = true
             view.widthAnchor.constraint(equalToConstant: 70).isActive = true
             
@@ -439,7 +438,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         button.setImage(UIImage(named: "checkmarkIcon"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 14, left: 11, bottom: 14, right: 12)
         button.layer.cornerRadius = 20
-        button.backgroundColor = UIColor.brown
+        button.backgroundColor = UIColor(named: "phoneBrownColor")
         button.addTarget(self, action: #selector(selectColorButtonTapped(_:)), for: .touchUpInside)
         
         return button
@@ -450,7 +449,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         button.widthAnchor.constraint(equalToConstant: 40).isActive = true
-//        button.setImage(UIImage(named: "checkmarkIcon"), for: .normal)§
         button.imageEdgeInsets = UIEdgeInsets(top: 14, left: 11, bottom: 14, right: 12)
         button.layer.cornerRadius = 20
         button.backgroundColor = UIColor(named: "darkBlueColor")
@@ -461,16 +459,42 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
     
     lazy var minStorageCapacityButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("128 gb", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 15)
+        button.backgroundColor = UIColor(named: "orangeColor")
+        button.addTarget(self, action: #selector(selectCapacityButtonTapped(_:)), for: .touchUpInside)
+        button.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        button.layer.cornerRadius = 10
+        
         return button
     }()
     
     lazy var maxStorageCapacityButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("256 gb", for: .normal)
+        button.setTitleColor(UIColor.systemGray, for: .normal)
+        button.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 15)
+        button.addTarget(self, action: #selector(selectCapacityButtonTapped(_:)), for: .touchUpInside)
+        button.heightAnchor.constraint(equalToConstant: 35).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        button.layer.cornerRadius = 10
         return button
     }()
     
     lazy var addToCartButton: UIButton = {
         let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(named: "orangeColor")
+        button.layer.cornerRadius = 10
+        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 370).isActive = true
+        button.setTitle("Add to Cart", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 23)
         return button
     }()
     
@@ -484,7 +508,23 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         // Pass the selected object to the new view controller.
     }
     */
-    
+    @objc func selectCapacityButtonTapped(_ sender: Any) {
+        guard let sender = sender as? UIButton else { fatalError() }
+        if sender === minStorageCapacityButton {
+            minStorageCapacityButton.backgroundColor = UIColor(named: "orangeColor")
+            minStorageCapacityButton.setTitleColor(UIColor.white, for: .normal)
+            
+            maxStorageCapacityButton.backgroundColor = .white
+            maxStorageCapacityButton.setTitleColor(UIColor.systemGray, for: .normal)
+            
+        } else {
+            maxStorageCapacityButton.backgroundColor = UIColor(named: "orangeColor")
+            maxStorageCapacityButton.setTitleColor(UIColor.white, for: .normal)
+            
+            minStorageCapacityButton.backgroundColor = .white
+            minStorageCapacityButton.setTitleColor(UIColor.systemGray, for: .normal)
+        }
+    }
     @objc func selectColorButtonTapped(_ sender: Any) {
         guard let sender = sender as? UIButton else { fatalError() }
         if sender === brownColorButton {
@@ -502,6 +542,11 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         sender.setImage(UIImage(named: isFavoriteClicked ? "favoriteButton" :"favoriteButtonClicked" ), for: .normal)
         isFavoriteClicked = !isFavoriteClicked
     }
+    
+    @objc func backButtonTapped() {
+        self.dismiss(animated: true)
+    }
+    
     @objc func descriptionCategoryButtonPressed(_ sender: Any) {
         guard let sender = sender as? UIButton else { fatalError() }
         guard let title = sender.titleLabel else { fatalError() }

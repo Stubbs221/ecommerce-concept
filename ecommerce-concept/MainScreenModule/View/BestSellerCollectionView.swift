@@ -9,10 +9,14 @@ import UIKit
 
 class BestSellerCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    init() {
+    
+    
+    var mainScreenView: MainScreenViewInput
+    
+    init(vc: MainScreenViewInput) {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        
+        self.mainScreenView = vc
         super.init(frame: .zero, collectionViewLayout: layout)
         self.backgroundColor = UIColor(named: "backgroundWhiteColor")
         delegate = self
@@ -44,7 +48,9 @@ class BestSellerCollectionView: UICollectionView, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        some logic with router
+        mainScreenView.showProductDetailsView()
+        
+        
     }
     
 

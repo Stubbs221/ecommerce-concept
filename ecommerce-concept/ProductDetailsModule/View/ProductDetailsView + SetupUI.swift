@@ -28,6 +28,10 @@ extension ProductDetailsView {
         productDescriptionView.addSubview(selectColorAndCapacityLabel)
         productDescriptionView.addSubview(brownColorButton)
         productDescriptionView.addSubview(blueColorButton)
+        productDescriptionView.addSubview(minStorageCapacityButton)
+        productDescriptionView.addSubview(maxStorageCapacityButton)
+        productDescriptionView.addSubview(addToCartButton)
+        
         
         NSLayoutConstraint.activate([
             productDetailsHeaderLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 75),
@@ -98,5 +102,15 @@ extension ProductDetailsView {
         NSLayoutConstraint.activate([
             blueColorButton.leadingAnchor.constraint(equalTo: brownColorButton.trailingAnchor, constant: 20),
             blueColorButton.topAnchor.constraint(equalTo: brownColorButton.topAnchor)])
+        
+        NSLayoutConstraint.activate([
+            minStorageCapacityButton.centerYAnchor.constraint(equalTo: brownColorButton.centerYAnchor),
+            minStorageCapacityButton.leadingAnchor.constraint(equalTo: blueColorButton.trailingAnchor, constant: 80),
+            maxStorageCapacityButton.centerYAnchor.constraint(equalTo: minStorageCapacityButton.centerYAnchor),
+            maxStorageCapacityButton.leadingAnchor.constraint(equalTo: minStorageCapacityButton.trailingAnchor, constant: 20)])
+        
+        NSLayoutConstraint.activate([
+            addToCartButton.centerXAnchor.constraint(equalTo: productDescriptionView.centerXAnchor),
+            addToCartButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40)])
     }
 }

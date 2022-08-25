@@ -9,13 +9,21 @@ import UIKit
 
 protocol MainScreenViewInput {
     var output: MainScreenViewOutput? { get set }
+    func showProductDetailsView()
 }
 
 protocol MainScreenViewOutput {
+    func showProductDetailsView()
 //    add choose category button func , hot sales view generator, bestseller collectioin view, filteer button and view
 }
 
 class MainScreenView: UIViewController, MainScreenViewInput {
+    func showProductDetailsView() {
+        let vc = ProductDetailsModuleBuilder.buildProductDetailsModule()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true, completion: nil)
+    }
+    
     
 
     var output: MainScreenViewOutput?
@@ -102,10 +110,10 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "filterButtonIcon"), for: .normal)
-        
+        button.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
         NSLayoutConstraint.activate([
-            button.heightAnchor.constraint(equalToConstant: 14),
-            button.widthAnchor.constraint(equalToConstant: 12)])
+            button.heightAnchor.constraint(equalToConstant: 16),
+            button.widthAnchor.constraint(equalToConstant: 14)])
         return button
     }()
     
@@ -267,7 +275,8 @@ class MainScreenView: UIViewController, MainScreenViewInput {
     }()
     
     lazy var bestSellerCollectionView: BestSellerCollectionView = {
-        let collectionView = BestSellerCollectionView()
+        let collectionView = BestSellerCollectionView(vc: self)
+        
         return collectionView
     }()
     
@@ -405,6 +414,13 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         view.frame = CGRect(x: screenWidth * position - 34 * position, y: 0, width: screenWidth - 34, height: 200)
         return view
     }
+    
+    @objc func filterButtonPressed() {
+        let vc = FilterModuleBuilder.buildFilterModule()
+        vc.modalPresentationStyle = .overCurrentContext
+        present(vc, animated: true, completion: nil)
+    }
+    
     
     
     
