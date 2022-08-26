@@ -27,10 +27,7 @@ final class ProductDetailsRouter: ProductDetailsRouterInput {
     func addToCartButtonSelected() {
         
     }
-    
-   
-    
-    
+
     weak var rootViewController: UIViewController?
     
 }

@@ -9,18 +9,13 @@ import UIKit
 
 extension ProductDetailsView {
     func updatePhoneData(with phoneData: ProductDetailsFetchResult) {
+        self.phoneData = phoneData
         
-            self.phoneData = phoneData
         setupUI()
         phoneImagesScrollView.addSubview(addPage(photoStringURL: phoneData.imagesStringURL[0], position: 0))
         phoneImagesScrollView.addSubview(addPage(photoStringURL: phoneData.imagesStringURL[1], position: 1))
-        print(phoneData.isFavorites)
         isFavorite = phoneData.isFavorites
         addToFavoriteButton.setImage(UIImage(named: (isFavorite ? "favoriteButtonClicked" : "favoriteTabBarButton" )), for: .normal)
-        
-            print(phoneData.cpu)
-            
-        
     }
     
     func updatePhoneData(with error: String) {
@@ -28,8 +23,6 @@ extension ProductDetailsView {
     }
     
     func addPage(photoStringURL: String, position: CGFloat) -> UIView {
-        
-        
         let view = UIView()
         guard  let url = URL(string: photoStringURL) else { return view}
         let photoView = UIImageView()
@@ -61,6 +54,7 @@ extension ProductDetailsView {
         view.frame = CGRect(x: screenWidth * position - 34 * position, y: 0, width: screenWidth, height: 350)
         return view
     }
+    
     @objc func selectCapacityButtonTapped(_ sender: Any) {
         guard let sender = sender as? UIButton else { fatalError() }
         if sender === minStorageCapacityButton {
@@ -77,6 +71,12 @@ extension ProductDetailsView {
             minStorageCapacityButton.backgroundColor = .white
             minStorageCapacityButton.setTitleColor(UIColor.systemGray, for: .normal)
         }
+    }
+    
+    @objc func addToCartTapped() {
+        ItemsInCart.shared.increaseItems()
+        itemsInCartLabel.text = String(ItemsInCart.shared.getItemsCount())
+        itemsInCartLabel.isHidden = false
     }
     @objc func selectColorButtonTapped(_ sender: Any) {
         guard let sender = sender as? UIButton else { fatalError() }

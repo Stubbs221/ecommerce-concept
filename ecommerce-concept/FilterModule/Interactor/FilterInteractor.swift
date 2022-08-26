@@ -17,6 +17,4 @@ protocol FilterInteractorOutput: AnyObject {
 
 final class FilterInteractor: FilterInteractorInput {
     weak var output: FilterInteractorOutput?
-    
-    
 }

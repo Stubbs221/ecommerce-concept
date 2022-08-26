@@ -15,7 +15,6 @@ final class FilterRouter: FilterRouterInput {
     func dismissFilterView() {
         rootViewController?.dismiss(animated: true)
     }
-    
-    
+
     weak var rootViewController: UIViewController? 
 }

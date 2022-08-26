@@ -28,13 +28,9 @@ final class ProductDetailsPresenter {
          interactor: ProductDetailsInteractorInput) {
         self.interactor = interactor
         
-  
         interactor.fetchPhoneData()
         self.view = view
         self.router = router
-        
-        
-        
     }
 }
 

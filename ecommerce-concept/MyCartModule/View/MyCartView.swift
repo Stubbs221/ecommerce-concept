@@ -6,28 +6,57 @@
 //
 
 import UIKit
+import Kingfisher
+
 
 protocol MyCartViewInput {
     var output: MyCartViewOutput? { get set }
+    
     
     func updateCartData(with cartData: CartData)
     func updateCartData(with error: String)
 }
 
 protocol MyCartViewOutput {
-
-    func userSelectDismissView()
+    
+    
+    func userSelectDismissView(itemsInCart: Int)
     
 }
 
 class MyCartView: UIViewController, MyCartViewInput {
-    var output: MyCartViewOutput? // ref to presenter
+    func updateCartData(with cartData: CartData) {
+        self.cartData = cartData
+        setupUI()
+        self.totalMoneyLabel.text = "$" + String(cartData.totalPrice) + " us"
+        self.deliveryCostLabel.text = cartData.delivery
+    }
     
+    func updateCartData(with error: String) {
+        print(error)
+    }
+    
+    
+    var output: MyCartViewOutput? // ref to presenter
+    var cartData: CartData?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let itemsInView = (Int(amountLabelOfSecondPhone.text ?? "") ?? 0) + (Int(amountLabelOfFirstPhone.text ?? "") ?? 0)
+        if itemsInView > ItemsInCart.shared.getItemsCount() {
+            for i in (ItemsInCart.shared.getItemsCount())..<itemsInView {
+                ItemsInCart.shared.increaseItems()
+            }
+        } else {
+            for i in itemsInView..<(ItemsInCart.shared.getItemsCount()) {
+                ItemsInCart.shared.decreaseItems()
+            }
+        }
     }
     
     lazy var backButton: UIButton = {
@@ -91,9 +120,13 @@ class MyCartView: UIViewController, MyCartViewInput {
         
         let imageView: UIImageView = {
             let imageView = UIImageView()
+            
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.layer.cornerRadius = 5
             imageView.backgroundColor = .white
+            guard let url = URL(string: cartData?.basket[0].imageURLString ?? "" ) else { return imageView }
+            imageView.kf.setImage(with: url)
+            imageView.layer.masksToBounds = true
             imageView.heightAnchor.constraint(equalToConstant: 90).isActive = true
             imageView.widthAnchor.constraint(equalToConstant: 90).isActive = true
             return imageView
@@ -101,7 +134,7 @@ class MyCartView: UIViewController, MyCartViewInput {
         
         let phoneNameLabel: UILabel = {
             let label = UILabel()
-            label.text = "phoneName"
+            label.text = cartData?.basket[0].title
             label.numberOfLines = 2
             label.translatesAutoresizingMaskIntoConstraints = false
             label.font = UIFont(name: "MarkPro-Medium", size: 20)
@@ -111,7 +144,7 @@ class MyCartView: UIViewController, MyCartViewInput {
         
         let phonePriceLabel: UILabel = {
             let label = UILabel()
-            label.text = "$0000.00"
+            label.text = String(cartData?.basket[0].price ?? 1)
             label.translatesAutoresizingMaskIntoConstraints = false
             label.textColor = UIColor(named: "orangeColor")
             label.font = UIFont(name: "MarkPro-Medium", size: 20)
@@ -126,45 +159,21 @@ class MyCartView: UIViewController, MyCartViewInput {
             view.widthAnchor.constraint(equalToConstant: 28).isActive = true
             view.layer.cornerRadius = 14
             
-            let decreaseAmountButton: UIButton = {
-                let button = UIButton()
-                button.setImage(UIImage(named: "decreaseIcon"), for: .normal)
-                button.translatesAutoresizingMaskIntoConstraints = false
-                button.heightAnchor.constraint(equalToConstant: 11).isActive = true
-                button.imageEdgeInsets = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
-                button.widthAnchor.constraint(equalToConstant: 11).isActive = true
-                return button
-            }()
             
-            let increaseAmountButton: UIButton = {
-                let button = UIButton()
-                button.setImage(UIImage(named: "increaseIcon"), for: .normal)
-                button.translatesAutoresizingMaskIntoConstraints = false
-                button.heightAnchor.constraint(equalToConstant: 11).isActive = true
-                button.widthAnchor.constraint(equalToConstant: 11).isActive = true
-                return button
-            }()
             
-            let amountLabel: UILabel = {
-                let label = UILabel()
-                label.text = "0"
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.font = UIFont(name: "MarkPro-Medium", size: 20)
-                label.textColor = UIColor.white
-                return label
-            }()
             
-            view.addSubview(decreaseAmountButton)
-            view.addSubview(increaseAmountButton)
-            view.addSubview(amountLabel)
+            
+            view.addSubview(decreaseAmountButtonTwo)
+            view.addSubview(increaseAmountButtonTwo)
+            view.addSubview(amountLabelOfFirstPhone)
             
             NSLayoutConstraint.activate([
-                amountLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                amountLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                decreaseAmountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                decreaseAmountButton.bottomAnchor.constraint(equalTo: amountLabel.topAnchor, constant: -3),
-                increaseAmountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                increaseAmountButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 4)])
+                amountLabelOfFirstPhone.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                amountLabelOfFirstPhone.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                decreaseAmountButtonTwo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                decreaseAmountButtonTwo.bottomAnchor.constraint(equalTo: amountLabelOfFirstPhone.topAnchor, constant: -3),
+                increaseAmountButtonTwo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                increaseAmountButtonTwo.topAnchor.constraint(equalTo: amountLabelOfFirstPhone.bottomAnchor, constant: 4)])
             return view
         }()
         
@@ -189,11 +198,12 @@ class MyCartView: UIViewController, MyCartViewInput {
         
         NSLayoutConstraint.activate([
             phoneNameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
-            phoneNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10)])
+            phoneNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            phoneNameLabel.trailingAnchor.constraint(equalTo: changeAmountView.leadingAnchor, constant: -3)])
         
         NSLayoutConstraint.activate([
             phonePriceLabel.leadingAnchor.constraint(equalTo: phoneNameLabel.leadingAnchor),
-            phonePriceLabel.topAnchor.constraint(equalTo: phoneNameLabel.bottomAnchor, constant: 20)])
+            phonePriceLabel.topAnchor.constraint(equalTo: phoneNameLabel.bottomAnchor, constant: 30)])
         
         NSLayoutConstraint.activate([
             changeAmountView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -218,6 +228,10 @@ class MyCartView: UIViewController, MyCartViewInput {
             imageView.translatesAutoresizingMaskIntoConstraints = false
             imageView.layer.cornerRadius = 5
             imageView.backgroundColor = .white
+            guard let url = URL(string: cartData?.basket[1].imageURLString ?? "" ) else { return imageView }
+            imageView.kf.setImage(with: url)
+            imageView.contentMode = .scaleAspectFill
+            imageView.layer.masksToBounds = true
             imageView.heightAnchor.constraint(equalToConstant: 90).isActive = true
             imageView.widthAnchor.constraint(equalToConstant: 90).isActive = true
             return imageView
@@ -225,7 +239,7 @@ class MyCartView: UIViewController, MyCartViewInput {
         
         let phoneNameLabel: UILabel = {
             let label = UILabel()
-            label.text = "phoneName"
+            label.text = cartData?.basket[1].title
             label.numberOfLines = 2
             label.translatesAutoresizingMaskIntoConstraints = false
             label.font = UIFont(name: "MarkPro-Medium", size: 20)
@@ -235,9 +249,10 @@ class MyCartView: UIViewController, MyCartViewInput {
         
         let phonePriceLabel: UILabel = {
             let label = UILabel()
-            label.text = "$0000.00"
+            label.text = String(cartData?.basket[1].price ?? 1)
             label.translatesAutoresizingMaskIntoConstraints = false
             label.textColor = UIColor(named: "orangeColor")
+            
             label.font = UIFont(name: "MarkPro-Medium", size: 20)
             return label
         }()
@@ -249,46 +264,18 @@ class MyCartView: UIViewController, MyCartViewInput {
             view.heightAnchor.constraint(equalToConstant: 70).isActive = true
             view.widthAnchor.constraint(equalToConstant: 28).isActive = true
             view.layer.cornerRadius = 14
-            
-            let decreaseAmountButton: UIButton = {
-                let button = UIButton()
-                button.setImage(UIImage(named: "decreaseIcon"), for: .normal)
-                button.translatesAutoresizingMaskIntoConstraints = false
-                button.heightAnchor.constraint(equalToConstant: 11).isActive = true
-                button.imageEdgeInsets = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
-                button.widthAnchor.constraint(equalToConstant: 11).isActive = true
-                return button
-            }()
-            
-            let increaseAmountButton: UIButton = {
-                let button = UIButton()
-                button.setImage(UIImage(named: "increaseIcon"), for: .normal)
-                button.translatesAutoresizingMaskIntoConstraints = false
-                button.heightAnchor.constraint(equalToConstant: 11).isActive = true
-                button.widthAnchor.constraint(equalToConstant: 11).isActive = true
-                return button
-            }()
-            
-            let amountLabel: UILabel = {
-                let label = UILabel()
-                label.text = "0"
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.font = UIFont(name: "MarkPro-Medium", size: 20)
-                label.textColor = UIColor.white
-                return label
-            }()
-            
-            view.addSubview(decreaseAmountButton)
-            view.addSubview(increaseAmountButton)
-            view.addSubview(amountLabel)
+        
+            view.addSubview(decreaseAmountButtonOne)
+            view.addSubview(increaseAmountButtonOne)
+            view.addSubview(amountLabelOfSecondPhone)
             
             NSLayoutConstraint.activate([
-                amountLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                amountLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                decreaseAmountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                decreaseAmountButton.bottomAnchor.constraint(equalTo: amountLabel.topAnchor, constant: -3),
-                increaseAmountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                increaseAmountButton.topAnchor.constraint(equalTo: amountLabel.bottomAnchor, constant: 4)])
+                amountLabelOfSecondPhone.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+                amountLabelOfSecondPhone.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                decreaseAmountButtonOne.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                decreaseAmountButtonOne.bottomAnchor.constraint(equalTo: amountLabelOfSecondPhone.topAnchor, constant: -3),
+                increaseAmountButtonOne.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                increaseAmountButtonOne.topAnchor.constraint(equalTo: amountLabelOfSecondPhone.bottomAnchor, constant: 4)])
             return view
         }()
         
@@ -313,11 +300,12 @@ class MyCartView: UIViewController, MyCartViewInput {
         
         NSLayoutConstraint.activate([
             phoneNameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
-            phoneNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10)])
+            phoneNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            phoneNameLabel.trailingAnchor.constraint(equalTo: changeAmountView.leadingAnchor, constant: -3)])
         
         NSLayoutConstraint.activate([
             phonePriceLabel.leadingAnchor.constraint(equalTo: phoneNameLabel.leadingAnchor),
-            phonePriceLabel.topAnchor.constraint(equalTo: phoneNameLabel.bottomAnchor, constant: 20)])
+            phonePriceLabel.topAnchor.constraint(equalTo: phoneNameLabel.bottomAnchor, constant: 30)])
         
         NSLayoutConstraint.activate([
             changeAmountView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -328,6 +316,66 @@ class MyCartView: UIViewController, MyCartViewInput {
             deleteItemButton.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
         
         return view
+    }()
+    
+    lazy var amountLabelOfFirstPhone: UILabel = {
+        let label = UILabel()
+        label.text = "1"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "MarkPro-Medium", size: 20)
+        label.textColor = UIColor.white
+        return label
+    }()
+    
+    let decreaseAmountButtonOne: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "decreaseIcon"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 11).isActive = true
+        button.imageEdgeInsets = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+        button.widthAnchor.constraint(equalToConstant: 11).isActive = true
+        button.addTarget(self, action: #selector(decreaseItemsInCartByOne(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    let increaseAmountButtonOne: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "increaseIcon"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 11).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 11).isActive = true
+        button.addTarget(self, action: #selector(increaseItemsInCartByOne(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    let decreaseAmountButtonTwo: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "decreaseIcon"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 11).isActive = true
+        button.imageEdgeInsets = UIEdgeInsets(top: 4, left: 0, bottom: 4, right: 0)
+        button.widthAnchor.constraint(equalToConstant: 11).isActive = true
+        button.addTarget(self, action: #selector(decreaseItemsInCartByOne(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    let increaseAmountButtonTwo: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "increaseIcon"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 11).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 11).isActive = true
+        button.addTarget(self, action: #selector(increaseItemsInCartByOne(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var amountLabelOfSecondPhone: UILabel = {
+        let label = UILabel()
+        label.text = "1"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "MarkPro-Medium", size: 20)
+        label.textColor = UIColor.white
+        return label
     }()
     
     lazy var firstLineView: UIView = {
@@ -394,16 +442,6 @@ class MyCartView: UIViewController, MyCartViewInput {
         button.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 20)
         return button
     }()
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    @objc func backButtonTapped() {
-        self.dismiss(animated: true)
-    }
+  
+    
 }

@@ -22,7 +22,6 @@ class BestSellerCell: UICollectionViewCell {
         view.layer.shadowRadius = 4
         view.layer.shadowOpacity = 0.1
         view.layer.shadowOffset = CGSize(width: 2, height: 2)
-        
         return view
     }()
     
@@ -31,7 +30,6 @@ class BestSellerCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-//        imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -131,7 +129,6 @@ class BestSellerCell: UICollectionViewCell {
     
     @objc func isFavoriteTapped() {
         isFavoriteButton.setImage(UIImage(named: (isFavorite ? "favoriteButton" : "favoriteButtonClicked" )), for: .normal)
-        
         self.isFavorite = !self.isFavorite
     }
 }

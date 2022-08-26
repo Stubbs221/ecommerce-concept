@@ -19,9 +19,7 @@ class FilterView: UIViewController, FilterViewInput {
     
     
     var output: FilterViewOutput?
-    
-
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

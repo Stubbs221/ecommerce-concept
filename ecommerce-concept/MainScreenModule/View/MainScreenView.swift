@@ -25,6 +25,7 @@ protocol MainScreenViewOutput {
     func userSelectOpenFilter()
     func userSelectOpenProductDetailView()
     func userSelectOpenMyCartView()
+    
 }
 
 class MainScreenView: UIViewController, MainScreenViewInput {
@@ -35,6 +36,7 @@ class MainScreenView: UIViewController, MainScreenViewInput {
     
     var homeStoreArray: [HomeStoreModel] = []
     var bestSellerArray: [BestSellerModel] = []
+    
     
     var output: MainScreenViewOutput?
     
@@ -196,6 +198,21 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         return view
     }()
     
+    lazy var itemsInCartLabel: UILabel = {
+        let label = UILabel()
+        label.text = String(ItemsInCart.shared.getItemsCount())
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .red
+        label.textColor = .white
+        label.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        label.font = UIFont(name: "MarkPro-Medium", size: 10)
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 8
+        return label
+    }()
+    
     lazy var scanQRButton: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -248,9 +265,7 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         scrollView.isPagingEnabled = true
         scrollView.delegate = self
         
-//        scrollView.addSubview(addPage(pictureURL: homeStoreArray[0].pictureURL, title: hotSalesArray[0], position: 0))
-//        scrollView.addSubview(addPage(pictureURL: homeStoreArray[1].pictureURL, title: hotSalesArray[1], position: 1))
-//        scrollView.addSubview(addPage(pictureURL: homeStoreArray[2].pictureURL, title: hotSalesArray[2], position: 2))
+
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         return scrollView
@@ -286,7 +301,6 @@ class MainScreenView: UIViewController, MainScreenViewInput {
     
     lazy var bestSellerCollectionView: BestSellerCollectionView = {
         let collectionView = BestSellerCollectionView(vc: self)
-        
         return collectionView
     }()
     
@@ -342,6 +356,7 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         view.addSubview(cartButton)
         view.addSubview(favoriteButton)
         view.addSubview(profileButton)
+        view.addSubview(itemsInCartLabel)
         
         NSLayoutConstraint.activate([
             dotImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -10),
@@ -356,21 +371,24 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         NSLayoutConstraint.activate([
             cartButton.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -10),
             cartButton.leadingAnchor.constraint(equalTo: explorerLabel.trailingAnchor, constant: 40),
-            cartButton.heightAnchor.constraint(equalToConstant: 20),
-            cartButton.widthAnchor.constraint(equalToConstant: 20)])
+            cartButton.heightAnchor.constraint(equalToConstant: 22),
+            cartButton.widthAnchor.constraint(equalToConstant: 22)])
         
         NSLayoutConstraint.activate([
             favoriteButton.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -10),
             favoriteButton.leadingAnchor.constraint(equalTo: cartButton.trailingAnchor, constant: 49),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 19),
-            favoriteButton.widthAnchor.constraint(equalToConstant: 20)])
+            favoriteButton.heightAnchor.constraint(equalToConstant: 21),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 22)])
         
         NSLayoutConstraint.activate([
             profileButton.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: -10),
             profileButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -65),
-            profileButton.heightAnchor.constraint(equalToConstant: 20),
-            profileButton.widthAnchor.constraint(equalToConstant: 20)])
+            profileButton.heightAnchor.constraint(equalToConstant: 22),
+            profileButton.widthAnchor.constraint(equalToConstant: 22)])
         
+        NSLayoutConstraint.activate([
+            itemsInCartLabel.topAnchor.constraint(equalTo: cartButton.topAnchor, constant: -8),
+            itemsInCartLabel.trailingAnchor.constraint(equalTo: cartButton.trailingAnchor, constant: 8)])
         return view
     }()
     
@@ -380,7 +398,12 @@ class MainScreenView: UIViewController, MainScreenViewInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        itemsInCartLabel.text = String(ItemsInCart.shared.getItemsCount())
+        ItemsInCart.shared.getItemsCount() == 0 ? (itemsInCartLabel.isHidden = true) :  (itemsInCartLabel.isHidden = false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -512,8 +535,7 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         NSLayoutConstraint.activate([
             subTitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5)])
-        
-        
+
         return view
     }
     
@@ -533,7 +555,6 @@ class MainScreenView: UIViewController, MainScreenViewInput {
     func updateBestSeller(with bestSeller: [BestSellerModel]) {
         self.bestSellerArray = bestSeller
         print("fetching bestSeller success")
-        
         bestSellerCollectionView.reloadData()
     }
     
@@ -544,19 +565,12 @@ class MainScreenView: UIViewController, MainScreenViewInput {
     @objc func filterButtonPressed() {
         output?.userSelectOpenFilter()
     }
-    
-    
-    
-    
-    
-    
 }
 
 extension MainScreenView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         pageControl.currentPage = Int(scrollView.contentOffset.x / UIScreen.main.bounds.width * 2)
     }
-    
 }
 //extension MainScreenView: MainScreenViewInput {
 //    var output: MainScreenViewInput?

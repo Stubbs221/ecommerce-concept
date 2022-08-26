@@ -43,13 +43,11 @@ class BestSellerCollectionView: UICollectionView, UICollectionViewDelegate, UICo
         if !mainScreenView.bestSellerArray.isEmpty {
             guard let url = URL(string: mainScreenView.bestSellerArray[indexPath.row].pictureURL) else { return cell }
             print(url)
-            
             cell.phoneImageView.kf.setImage(with: url)
             cell.titleLabel.text = mainScreenView.bestSellerArray[indexPath.row].title
             cell.discountPriceLabel.text = "$ " + String(mainScreenView.bestSellerArray[indexPath.row].discountPrice)
             cell.currentPriceLabel.text = "$ " + String(mainScreenView.bestSellerArray[indexPath.row].priceWithoutDiscount)
             cell.isFavorite = mainScreenView.bestSellerArray[indexPath.row].isFavorites
-            
             if mainScreenView.bestSellerArray[indexPath.row].isFavorites {
                 cell.isFavoriteButton.setImage(UIImage(named: "favoriteButtonClicked"), for: .normal)
             }
@@ -65,13 +63,10 @@ class BestSellerCollectionView: UICollectionView, UICollectionViewDelegate, UICo
         mainScreenView.userSelectOpenProductDetailViewThroughCollectionView()
     }
     
-
     struct Constants {
         static let leftDistanceToView: CGFloat = 17
         static let rightDistanceToView: CGFloat = 17
         static let bestSellerMinimumLineSpacing: CGFloat = 10
         static let bestSellerItemWidth = (UIScreen.main.bounds.width - Constants.leftDistanceToView - Constants.rightDistanceToView - (Constants.bestSellerMinimumLineSpacing / 2) / 2)
     }
-    
-
 }

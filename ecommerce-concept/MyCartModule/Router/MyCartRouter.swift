@@ -8,14 +8,13 @@
 import UIKit
 
 protocol MyCartRouterInput {
-    func dismissMyCartView()
+    func dismissMyCartView(itemsInCart: Int)
 }
 
 final class MyCartRouter: MyCartRouterInput {
-    func dismissMyCartView() {
+    func dismissMyCartView(itemsInCart: Int) {
         rootViewController?.dismiss(animated: true)
     }
-    
     
     weak var rootViewController: UIViewController?
 }

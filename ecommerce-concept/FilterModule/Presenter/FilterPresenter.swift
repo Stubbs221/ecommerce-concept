@@ -30,13 +30,10 @@ final class FilterPresenter {
     }
 }
 
-
 extension FilterPresenter: FilterViewOutput {
     func userSelectDismissFilterView() {
         router.dismissFilterView()
     }
-    
-    
 }
 
 extension FilterPresenter: FilterInteractorOutput {

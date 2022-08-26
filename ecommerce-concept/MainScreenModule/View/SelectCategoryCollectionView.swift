@@ -29,13 +29,11 @@ class SelectCategoryCollectionView: UICollectionView, UICollectionViewDelegate, 
         
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         5
@@ -59,7 +57,6 @@ class SelectCategoryCollectionView: UICollectionView, UICollectionViewDelegate, 
         for i in 0..<isPressed.count {
             isPressed[i] = false
         }
-        
         isPressed[indexPath.row] = true
         reloadData()
     }

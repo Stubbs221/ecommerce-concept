@@ -31,6 +31,7 @@ extension ProductDetailsView {
         productDescriptionView.addSubview(minStorageCapacityButton)
         productDescriptionView.addSubview(maxStorageCapacityButton)
         productDescriptionView.addSubview(addToCartButton)
+        productDescriptionView.addSubview(itemsInCartLabel)
         
         
         NSLayoutConstraint.activate([
@@ -44,6 +45,10 @@ extension ProductDetailsView {
         NSLayoutConstraint.activate([
             cartButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -42),
             cartButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 67)])
+        
+        NSLayoutConstraint.activate([
+            itemsInCartLabel.topAnchor.constraint(equalTo: cartButton.topAnchor, constant: -8),
+            itemsInCartLabel.trailingAnchor.constraint(equalTo: cartButton.trailingAnchor, constant: 8)])
         
         NSLayoutConstraint.activate([
             phoneImagesScrollView.topAnchor.constraint(equalTo: productDetailsHeaderLabel.bottomAnchor, constant: 20),

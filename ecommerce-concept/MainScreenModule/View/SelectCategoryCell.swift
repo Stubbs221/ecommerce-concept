@@ -66,8 +66,6 @@ class SelectCategoryCell: UICollectionViewCell {
             categoryImage.centerYAnchor.constraint(equalTo: roundView.centerYAnchor),
             categoryLabel.topAnchor.constraint(equalTo: roundView.bottomAnchor, constant: 10),
             categoryLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)])
-        
-        
     }
     
     required init?(coder: NSCoder) {

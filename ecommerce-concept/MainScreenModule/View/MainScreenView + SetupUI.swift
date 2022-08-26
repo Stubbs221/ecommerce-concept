@@ -10,14 +10,10 @@ import UIKit
 extension MainScreenView {
     func setupUI() {
         view.backgroundColor = UIColor(named: "backgroundWhiteColor")
-        
-//        let safeG = view.safeAreaLayoutGuide
-//        let contentG = mainScrollView.contentLayoutGuide
-//        
+            
         view.addSubview(mainScrollView)
         view.addSubview(customTabBar)
         mainScrollView.addSubview(contentView)
-//
         
         mainScrollView.addSubview(geoLabelView)
         mainScrollView.addSubview(filterButton)
@@ -33,7 +29,6 @@ extension MainScreenView {
         mainScrollView.addSubview(bestSellerLabel)
         mainScrollView.addSubview(seeMoreSecondLabel)
         mainScrollView.addSubview(bestSellerCollectionView)
-        
         
         NSLayoutConstraint.activate([
             mainScrollView.topAnchor.constraint(equalTo: view.topAnchor),

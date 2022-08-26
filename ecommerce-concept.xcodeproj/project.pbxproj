@@ -46,6 +46,8 @@
 		04CF224728B8FF8D0016BBCA /* ProductDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF224628B8FF8D0016BBCA /* ProductDetailsModel.swift */; };
 		04CF224928B916130016BBCA /* ProductDetailsView + Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF224828B916130016BBCA /* ProductDetailsView + Actions.swift */; };
 		04CF224B28B91E080016BBCA /* MyCartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF224A28B91E080016BBCA /* MyCartModel.swift */; };
+		04CF224F28B940AE0016BBCA /* ItemsInCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF224E28B940AE0016BBCA /* ItemsInCart.swift */; };
+		04CF225128B94FB20016BBCA /* MyCartView + Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF225028B94FB20016BBCA /* MyCartView + Actions.swift */; };
 		8031DE7810AF0701525ADA79 /* Pods_ecommerce_concept.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EEEFEC39DE8562F50866420 /* Pods_ecommerce_concept.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +93,8 @@
 		04CF224628B8FF8D0016BBCA /* ProductDetailsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsModel.swift; sourceTree = "<group>"; };
 		04CF224828B916130016BBCA /* ProductDetailsView + Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductDetailsView + Actions.swift"; sourceTree = "<group>"; };
 		04CF224A28B91E080016BBCA /* MyCartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCartModel.swift; sourceTree = "<group>"; };
+		04CF224E28B940AE0016BBCA /* ItemsInCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsInCart.swift; sourceTree = "<group>"; };
+		04CF225028B94FB20016BBCA /* MyCartView + Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyCartView + Actions.swift"; sourceTree = "<group>"; };
 		645200CA79B06AD5DF3A6154 /* Pods-ecommerce-concept.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce-concept.debug.xcconfig"; path = "Target Support Files/Pods-ecommerce-concept/Pods-ecommerce-concept.debug.xcconfig"; sourceTree = "<group>"; };
 		9EEEFEC39DE8562F50866420 /* Pods_ecommerce_concept.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ecommerce_concept.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C48AE7A004E8873BA2D1E254 /* Pods-ecommerce-concept.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce-concept.release.xcconfig"; path = "Target Support Files/Pods-ecommerce-concept/Pods-ecommerce-concept.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 				04CF21BB28B3A4E90016BBCA /* MainScreenModule */,
 				04CF217928B37E550016BBCA /* AppDelegate.swift */,
 				04CF217B28B37E550016BBCA /* SceneDelegate.swift */,
+				04CF224E28B940AE0016BBCA /* ItemsInCart.swift */,
 				04CF218228B37E560016BBCA /* Assets.xcassets */,
 				04CF218428B37E560016BBCA /* LaunchScreen.storyboard */,
 				04CF218728B37E560016BBCA /* Info.plist */,
@@ -202,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				04CF221128B7E5CE0016BBCA /* MyCartView.swift */,
+				04CF225028B94FB20016BBCA /* MyCartView + Actions.swift */,
 				04CF221528B7F1EE0016BBCA /* MyCartView + SetupUI.swift */,
 			);
 			path = View;
@@ -515,9 +521,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CF224F28B940AE0016BBCA /* ItemsInCart.swift in Sources */,
 				04CF221428B7E6E90016BBCA /* MyCartInteractor.swift in Sources */,
 				04CF220E28B7E47D0016BBCA /* MyCartRouter.swift in Sources */,
 				04CF21D928B3CDBB0016BBCA /* MainScreenInteractor.swift in Sources */,
+				04CF225128B94FB20016BBCA /* MyCartView + Actions.swift in Sources */,
 				04CF217A28B37E550016BBCA /* AppDelegate.swift in Sources */,
 				04CF21D728B3CCA70016BBCA /* MainScreenPresenter.swift in Sources */,
 				04CF21F928B763FA0016BBCA /* ProductDetailsView + SetupUI.swift in Sources */,

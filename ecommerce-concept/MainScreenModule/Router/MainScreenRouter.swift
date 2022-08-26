@@ -31,7 +31,7 @@ final class MainScreenRouter: MainScreenRouterInput {
         vc.modalPresentationStyle = .fullScreen
         rootViewController?.present(vc, animated: true, completion: nil)
     }
-    weak var rootViewController: UIViewController?
     
+    weak var rootViewController: UIViewController?
     
 }

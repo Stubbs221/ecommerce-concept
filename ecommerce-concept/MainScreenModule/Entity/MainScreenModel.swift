@@ -66,8 +66,6 @@ struct BestSellerModel: Mappable {
         discountPrice <- map["discount_price"]
         pictureURL <- map["picture"]
     }
-    
-    
 }
 
 enum Error: Swift.Error {

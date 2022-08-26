@@ -31,12 +31,16 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
     var isBlueColorClicked: Bool = false
     var isFavorite: Bool = false
     
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        itemsInCartLabel.text = String(ItemsInCart.shared.getItemsCount())
+        ItemsInCart.shared.getItemsCount() == 0 ? (itemsInCartLabel.isHidden = true) :  (itemsInCartLabel.isHidden = false)
     }
     
     lazy var productDetailsHeaderLabel: UILabel = {
@@ -74,8 +78,22 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         return button
     }()
     
+    lazy var itemsInCartLabel: UILabel = {
+        let label = UILabel()
+        label.text = String(ItemsInCart.shared.getItemsCount())
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .red
+        label.textColor = .white
+        label.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        label.font = UIFont(name: "MarkPro-Medium", size: 10)
+        label.textAlignment = .center
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = 8
+        return label
+    }()
+    
     lazy var phoneImagesScrollView: UIScrollView = {
-        
         
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -83,8 +101,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         scrollView.contentSize = CGSize(width: Int(UIScreen.main.bounds.width) * photoArray.count - 34 , height: 350)
         scrollView.isPagingEnabled = true
         scrollView.delegate = self
-        
-        
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         return scrollView
@@ -100,8 +116,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         return pageControl
     }()
     
-    
-    
     lazy var productDescriptionView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -112,7 +126,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         view.layer.shadowOpacity = 0.2
         view.layer.shadowOffset = CGSize(width: 2, height: 2)
         view.heightAnchor.constraint(equalToConstant: 490).isActive = true
-        
         return view
     }()
     
@@ -185,7 +198,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         }()
         
         let imagesArray = [imageView,imageView2,imageView3,imageView4,imageView5]
-        
         let stackView = UIStackView(arrangedSubviews: imagesArray)
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -319,7 +331,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         let memoryView: UIView = {
             let view = UIView()
             view.translatesAutoresizingMaskIntoConstraints = false
-//            view.backgroundColor = .blue
             view.heightAnchor.constraint(equalToConstant: 50).isActive = true
             view.widthAnchor.constraint(equalToConstant: 70).isActive = true
             
@@ -356,7 +367,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         let flashMemoryView: UIView = {
             let view = UIView()
             view.translatesAutoresizingMaskIntoConstraints = false
-//            view.backgroundColor = .blue
             view.heightAnchor.constraint(equalToConstant: 50).isActive = true
             view.widthAnchor.constraint(equalToConstant: 70).isActive = true
             
@@ -394,7 +404,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         let stackView = UIStackView(arrangedSubviews: [processorView, cameraView, memoryView, flashMemoryView])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .equalSpacing
-        
         return stackView
     }()
     
@@ -473,6 +482,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         button.setTitle("Add to Cart    $\(price)", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 23)
+        button.addTarget(self, action: #selector(addToCartTapped), for: .touchUpInside)
         return button
     }()
 }
