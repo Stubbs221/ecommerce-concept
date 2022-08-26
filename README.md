@@ -3,6 +3,8 @@
 architecture in iOS using libraries and frameworks 
 like Alamofire, AlamofireObjectMapper, ObjectMapper, Kingfisher 
 
+Figma [project](https://www.figma.com/file/KqZcU5m3GMxAHwgFkvCONz/ECOMMERCE?node-id=2%3A845 "click me") used as reference 
+
 Required: 
 
 --> Alamofire 
