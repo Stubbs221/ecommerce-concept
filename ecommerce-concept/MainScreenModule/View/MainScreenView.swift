@@ -6,36 +6,45 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol MainScreenViewInput {
     var output: MainScreenViewOutput? { get set }
-    func showProductDetailsView()
+    
+    var bestSellerArray: [BestSellerModel] { get set }
+    func userSelectOpenProductDetailViewThroughCollectionView()
+
+    func updateHomeStore(with homeStore: [HomeStoreModel])
+    func updateHomeStore(with error: String)
+    func updateBestSeller(with bestSeller: [BestSellerModel])
+    func updateBestSeller(with error: String)
 }
 
 protocol MainScreenViewOutput {
-    func showProductDetailsView()
-//    add choose category button func , hot sales view generator, bestseller collectioin view, filteer button and view
+    
+    func userSelectOpenFilter()
+    func userSelectOpenProductDetailView()
+    func userSelectOpenMyCartView()
 }
 
 class MainScreenView: UIViewController, MainScreenViewInput {
-    func showProductDetailsView() {
-        let vc = ProductDetailsModuleBuilder.buildProductDetailsModule()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
+    
+    func userSelectOpenProductDetailViewThroughCollectionView() {
+        output?.userSelectOpenProductDetailView()
     }
     
+    var homeStoreArray: [HomeStoreModel] = []
+    var bestSellerArray: [BestSellerModel] = []
     
-
     var output: MainScreenViewOutput?
+    
     var hotSalesArray: [String] = ["Iphone", "Samsung", "Xiaomi"]
     var timer = Timer()
-    
     
     lazy var mainScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = UIColor(named: "backgroundWhiteColor")
-//        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 2300)
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
         
@@ -238,9 +247,10 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         scrollView.contentSize = CGSize(width: Int(UIScreen.main.bounds.width) * hotSalesArray.count - 34 * 3, height: 200)
         scrollView.isPagingEnabled = true
         scrollView.delegate = self
-        scrollView.addSubview(addPage(title: hotSalesArray[0], position: 0))
-        scrollView.addSubview(addPage(title: hotSalesArray[1], position: 1))
-        scrollView.addSubview(addPage(title: hotSalesArray[2], position: 2))
+        
+//        scrollView.addSubview(addPage(pictureURL: homeStoreArray[0].pictureURL, title: hotSalesArray[0], position: 0))
+//        scrollView.addSubview(addPage(pictureURL: homeStoreArray[1].pictureURL, title: hotSalesArray[1], position: 1))
+//        scrollView.addSubview(addPage(pictureURL: homeStoreArray[2].pictureURL, title: hotSalesArray[2], position: 2))
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         return scrollView
@@ -307,6 +317,7 @@ class MainScreenView: UIViewController, MainScreenViewInput {
             button.translatesAutoresizingMaskIntoConstraints = false
             button.contentMode = .scaleAspectFill
             button.setImage(UIImage(named: "cartTabBarButton"), for: .normal)
+            button.addTarget(self, action: #selector(userSelectMyCart), for: .touchUpInside)
             return button
         }()
         
@@ -388,37 +399,150 @@ class MainScreenView: UIViewController, MainScreenViewInput {
                 self.hotSalesScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             }
         })
-        
-        
-       
-        
     }
     
-    func addPage(title: String, position: CGFloat) -> UIView {
-        let label = UILabel()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer.invalidate()
+    }
+    
+    @objc func userSelectMyCart() {
+        output?.userSelectOpenMyCartView()
+    }
+    
+    func addPage(pictureURL: String, title: String, isNew: Bool, subTitle: String, position: CGFloat) -> UIView {
         let view = UIView()
+        
         view.translatesAutoresizingMaskIntoConstraints = true
         view.backgroundColor = .white
         view.layer.cornerRadius = 20
 
+        guard let url = URL(string: pictureURL) else { return UIView() }
+        let title = title, isNew = isNew, subTitle = subTitle
         print(title)
-        label.text = title
-        label.textAlignment = .center
-        label.textColor = UIColor(named: "orangeColor")
-        label.translatesAutoresizingMaskIntoConstraints = false
+        print(subTitle)
+        let titleLabel: UILabel = {
+            let label = UILabel()
+            label.text = title
+            label.font = UIFont(name: "MarkPro-Bold", size: 26)
+            label.textColor = .white
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+        let subTitleLabel: UILabel = {
+            let label = UILabel()
+            label.text = subTitle
+            label.font = UIFont(name: "MarkPro", size: 12)
+            label.textColor = .white
+            label.translatesAutoresizingMaskIntoConstraints = false
+            return label
+        }()
+        
+        let buyNowButton: UIButton = {
+            let button = UIButton()
+            button.backgroundColor = .white
+            button.layer.cornerRadius = 5
+            button.heightAnchor.constraint(equalToConstant: 25).isActive = true
+            button.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            button.setTitle("Buy now!", for: .normal)
+            button.setTitleColor(UIColor(named: "darkBlueColor"), for: .normal)
+            button.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 12)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            return button
+        }()
+        
+        let isNewLabel: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.backgroundColor = UIColor(named: "orangeColor")
+            label.clipsToBounds = true
+            label.text = "New"
+            label.textAlignment = .center
+            label.font = UIFont(name: "MarkPro-Bold", size: 11)
+            label.textColor = .white
+            label.layer.cornerRadius = 15
+            label.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            label.widthAnchor.constraint(equalToConstant: 30).isActive = true
+            return label
+        }()
+        
+        let phoneImage: UIImageView = {
+            let imageView = UIImageView()
+            
+            imageView.kf.setImage(with: url)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.contentMode = .scaleAspectFill
+            imageView.layer.masksToBounds = true
+            imageView.layer.cornerRadius = 20
+            
+            return imageView
+        }()
         let screenWidth = UIScreen.main.bounds.width
-        view.addSubview(label)
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
+
+        
         view.frame = CGRect(x: screenWidth * position - 34 * position, y: 0, width: screenWidth - 34, height: 200)
+        view.addSubview(phoneImage)
+        view.addSubview(titleLabel)
+        view.addSubview(subTitleLabel)
+        view.addSubview(buyNowButton)
+        
+        if isNew {
+            view.addSubview(isNewLabel)
+            
+            NSLayoutConstraint.activate([
+                isNewLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+                isNewLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 25)])
+        }
+        
+        NSLayoutConstraint.activate([
+            phoneImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            phoneImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            phoneImage.topAnchor.constraint(equalTo: view.topAnchor),
+            phoneImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+        
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70)])
+        
+        NSLayoutConstraint.activate([
+            buyNowButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
+            buyNowButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35)])
+        
+        NSLayoutConstraint.activate([
+            subTitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 5)])
+        
+        
         return view
     }
     
+    func updateHomeStore(with homeStore: [HomeStoreModel]) {
+        self.homeStoreArray = homeStore
+        print("fetching homeStore success")
+        print(homeStoreArray[0].title)
+        hotSalesScrollView.addSubview(addPage(pictureURL: homeStoreArray[0].pictureURL, title: homeStoreArray[0].title, isNew: homeStoreArray[0].isNew, subTitle: homeStoreArray[0].subTitle, position: 0))
+        hotSalesScrollView.addSubview(addPage(pictureURL: homeStoreArray[1].pictureURL, title: homeStoreArray[1].title, isNew: homeStoreArray[1].isNew, subTitle: homeStoreArray[1].subTitle, position: 1))
+        hotSalesScrollView.addSubview(addPage(pictureURL: homeStoreArray[2].pictureURL, title: homeStoreArray[2].title, isNew: homeStoreArray[2].isNew, subTitle: homeStoreArray[2].subTitle, position: 2))
+    }
+    
+    func updateHomeStore(with error: String) {
+        print(error)
+    }
+    
+    func updateBestSeller(with bestSeller: [BestSellerModel]) {
+        self.bestSellerArray = bestSeller
+        print("fetching bestSeller success")
+        
+        bestSellerCollectionView.reloadData()
+    }
+    
+    func updateBestSeller(with error: String) {
+        print(error)
+    }
+    
     @objc func filterButtonPressed() {
-        let vc = FilterModuleBuilder.buildFilterModule()
-        vc.modalPresentationStyle = .overCurrentContext
-        present(vc, animated: true, completion: nil)
+        output?.userSelectOpenFilter()
     }
     
     

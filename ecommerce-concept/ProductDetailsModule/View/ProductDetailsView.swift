@@ -6,26 +6,36 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol ProductDetailsViewInput {
     var output: ProductDetailsViewOutput? { get set }
+    
+    func updatePhoneData(with phoneData: ProductDetailsFetchResult)
+    func updatePhoneData(with error: String)
 }
 
 protocol ProductDetailsViewOutput {
-//    add cart icon, add add to cart button, phone data generator, add favorite button
+    func userSelectDismissProductDetailsView()
+    func userSelectAddToCartButton()
+    func userSelectOpenMyCartViewFromProductDetailsView()
+    
 }
 
 class ProductDetailsView: UIViewController, ProductDetailsViewInput {
+    
     var output: ProductDetailsViewOutput?
     
-    
+    var phoneData: ProductDetailsFetchResult? = nil
     var photoArray: [String] = ["Photo1", "Photo2"]
-    var isFavoriteClicked: Bool = false
     var isBlueColorClicked: Bool = false
+    var isFavorite: Bool = false
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        
         // Do any additional setup after loading the view.
     }
     
@@ -60,6 +70,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         button.layer.cornerRadius = 10
         button.imageEdgeInsets = UIEdgeInsets(top: 11, left: 12, bottom: 12, right: 11)
+        button.addTarget(self, action: #selector(myCartButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -72,8 +83,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         scrollView.contentSize = CGSize(width: Int(UIScreen.main.bounds.width) * photoArray.count - 34 , height: 350)
         scrollView.isPagingEnabled = true
         scrollView.delegate = self
-        scrollView.addSubview(addPage(title: photoArray[0], position: 0))
-        scrollView.addSubview(addPage(title: photoArray[1], position: 1))
+        
         
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
@@ -90,41 +100,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         return pageControl
     }()
     
-    func addPage(title: String, position: CGFloat) -> UIView {
-        let label = UILabel()
-        let view = UIView()
-        let photoView = UIView()
-        photoView.translatesAutoresizingMaskIntoConstraints = false
-        photoView.backgroundColor = .white
-        photoView.layer.cornerRadius = 20
-        photoView.layer.masksToBounds = false
-        photoView.layer.shadowRadius = 4
-        photoView.layer.shadowOpacity = 0.2
-        photoView.layer.shadowOffset = CGSize(width: 2, height: 2)
-        
-        view.translatesAutoresizingMaskIntoConstraints = true
-        view.backgroundColor = UIColor(named: "backgroundWhiteColor")
-
-        print(title)
-        label.text = title
-        label.textAlignment = .center
-        label.textColor = UIColor(named: "orangeColor")
-        label.translatesAutoresizingMaskIntoConstraints = false
-        let screenWidth = UIScreen.main.bounds.width
-        photoView.addSubview(label)
-        view.addSubview(photoView)
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: photoView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: photoView.centerYAnchor)])
-        NSLayoutConstraint.activate([
-            photoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            photoView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            photoView.widthAnchor.constraint(equalToConstant: 250),
-            photoView.heightAnchor.constraint(equalToConstant: 320)
-            ])
-        view.frame = CGRect(x: screenWidth * position - 34 * position, y: 0, width: screenWidth, height: 350)
-        return view
-    }
+    
     
     lazy var productDescriptionView: UIView = {
         let view = UIView()
@@ -143,7 +119,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
     lazy var phoneNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Model name"
+        label.text = phoneData?.title
         label.font = UIFont(name: "MarkPro-Medium", size: 24)
         label.textColor = UIColor(named: "darkBlueColor")
         return label
@@ -155,7 +131,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         button.heightAnchor.constraint(equalToConstant: 37).isActive = true
         button.widthAnchor.constraint(equalToConstant: 37).isActive = true
         button.layer.cornerRadius = 10
-        button.setImage(UIImage(named: "favoriteTabBarButton"), for: .normal)
         button.imageEdgeInsets = UIEdgeInsets(top: 11, left: 10, bottom: 11, right: 10)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(addToFavoriteTapped(_:)), for: .touchUpInside)
@@ -288,7 +263,9 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.font = UIFont(name: "MarkPro", size: 13)
                 label.textColor = UIColor.lightGray
-                label.text = "data"
+                print("cpu name is \(self.phoneData?.cpu)")
+                label.text = self.phoneData?.cpu
+                
                 return label
             }()
             view.addSubview(imageView)
@@ -324,7 +301,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.font = UIFont(name: "MarkPro", size: 13)
                 label.textColor = UIColor.lightGray
-                label.text = "data"
+                label.text = phoneData?.camera
                 return label
             }()
             view.addSubview(imageView)
@@ -361,7 +338,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.font = UIFont(name: "MarkPro", size: 13)
                 label.textColor = UIColor.lightGray
-                label.text = "data"
+                label.text = phoneData?.memory
                 return label
             }()
             view.addSubview(imageView)
@@ -398,7 +375,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.font = UIFont(name: "MarkPro", size: 13)
                 label.textColor = UIColor.lightGray
-                label.text = "data"
+                label.text = phoneData?.maxSDCapacity
                 return label
             }()
             view.addSubview(imageView)
@@ -460,7 +437,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
     lazy var minStorageCapacityButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("128 gb", for: .normal)
+        button.setTitle((phoneData?.capacity[0] ?? "0") + " gb", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 15)
         button.backgroundColor = UIColor(named: "orangeColor")
@@ -475,7 +452,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
     lazy var maxStorageCapacityButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("256 gb", for: .normal)
+        button.setTitle((phoneData?.capacity[1] ?? "0") + " gb", for: .normal)
         button.setTitleColor(UIColor.systemGray, for: .normal)
         button.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 15)
         button.addTarget(self, action: #selector(selectCapacityButtonTapped(_:)), for: .touchUpInside)
@@ -492,101 +469,12 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         button.layer.cornerRadius = 10
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
         button.widthAnchor.constraint(equalToConstant: 370).isActive = true
-        button.setTitle("Add to Cart", for: .normal)
+        guard let price = phoneData?.price else { return button }
+        button.setTitle("Add to Cart    $\(price)", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 23)
         return button
     }()
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    @objc func selectCapacityButtonTapped(_ sender: Any) {
-        guard let sender = sender as? UIButton else { fatalError() }
-        if sender === minStorageCapacityButton {
-            minStorageCapacityButton.backgroundColor = UIColor(named: "orangeColor")
-            minStorageCapacityButton.setTitleColor(UIColor.white, for: .normal)
-            
-            maxStorageCapacityButton.backgroundColor = .white
-            maxStorageCapacityButton.setTitleColor(UIColor.systemGray, for: .normal)
-            
-        } else {
-            maxStorageCapacityButton.backgroundColor = UIColor(named: "orangeColor")
-            maxStorageCapacityButton.setTitleColor(UIColor.white, for: .normal)
-            
-            minStorageCapacityButton.backgroundColor = .white
-            minStorageCapacityButton.setTitleColor(UIColor.systemGray, for: .normal)
-        }
-    }
-    @objc func selectColorButtonTapped(_ sender: Any) {
-        guard let sender = sender as? UIButton else { fatalError() }
-        if sender === brownColorButton {
-            brownColorButton.setImage(UIImage(named: "checkmarkIcon"), for: .normal)
-            blueColorButton.setImage(nil, for: .normal)
-        } else {
-            blueColorButton.setImage(UIImage(named: "checkmarkIcon"), for: .normal)
-            brownColorButton.setImage(nil, for: .normal)
-        }
-    }
-    
-    @objc func addToFavoriteTapped(_ sender: Any) {
-        guard let sender = sender as? UIButton else { fatalError() }
-        
-        sender.setImage(UIImage(named: isFavoriteClicked ? "favoriteButton" :"favoriteButtonClicked" ), for: .normal)
-        isFavoriteClicked = !isFavoriteClicked
-    }
-    
-    @objc func backButtonTapped() {
-        self.dismiss(animated: true)
-    }
-    
-    @objc func descriptionCategoryButtonPressed(_ sender: Any) {
-        guard let sender = sender as? UIButton else { fatalError() }
-        guard let title = sender.titleLabel else { fatalError() }
-        switch title.text {
-        case "Shop":
-            shopButton.setTitleColor(UIColor(named: "darkBlueColor"), for: .normal)
-            shopButton.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 20)
-            UIView.animate(withDuration: 0.5) {
-                self.underlineView.transform = CGAffineTransform(translationX: self.shopButton.frame.minX - self.underlineView.frame.width / 2, y: 0)
-            }
-            detailsButton.setTitleColor(UIColor.systemGray, for: .normal)
-            detailsButton.titleLabel?.font = UIFont(name: "MarkPro", size: 20)
-            featuresButton.setTitleColor(UIColor.systemGray, for: .normal)
-            featuresButton.titleLabel?.font = UIFont(name: "MarkPro", size: 20)
-        case "Details":
-            detailsButton.setTitleColor(UIColor(named: "darkBlueColor"), for: .normal)
-            UIView.animate(withDuration: 0.5) {
-                self.underlineView.transform = CGAffineTransform(translationX: self.detailsButton.frame.minX - self.underlineView.frame.width / 2 + 5, y: 0)
-            }
-            detailsButton.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 20)
-            shopButton.setTitleColor(UIColor.systemGray, for: .normal)
-            shopButton.titleLabel?.font = UIFont(name: "MarkPro", size: 20)
-            featuresButton.setTitleColor(UIColor.systemGray, for: .normal)
-            featuresButton.titleLabel?.font = UIFont(name: "MarkPro", size: 20)
-        case "Features":
-            featuresButton.setTitleColor(UIColor(named: "darkBlueColor"), for: .normal)
-            UIView.animate(withDuration: 0.5) {
-                self.underlineView.transform = CGAffineTransform(translationX: self.featuresButton.frame.midX - self.underlineView.frame.width + 20, y: 0)
-            }
-            featuresButton.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 20)
-            shopButton.setTitleColor(UIColor.systemGray, for: .normal)
-            shopButton.titleLabel?.font = UIFont(name: "MarkPro", size: 20)
-            detailsButton.setTitleColor(UIColor.systemGray, for: .normal)
-            detailsButton.titleLabel?.font = UIFont(name: "MarkPro", size: 20)
-        default: print("default")
-        }
-        
-        
-    }
-    
 }
 
 extension ProductDetailsView: UIScrollViewDelegate {

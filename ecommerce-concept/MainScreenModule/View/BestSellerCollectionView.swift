@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class BestSellerCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -39,7 +40,20 @@ class BestSellerCollectionView: UICollectionView, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = dequeueReusableCell(withReuseIdentifier: BestSellerCell.identifier, for: indexPath) as? BestSellerCell else { fatalError() }
-        
+        if !mainScreenView.bestSellerArray.isEmpty {
+            guard let url = URL(string: mainScreenView.bestSellerArray[indexPath.row].pictureURL) else { return cell }
+            print(url)
+            
+            cell.phoneImageView.kf.setImage(with: url)
+            cell.titleLabel.text = mainScreenView.bestSellerArray[indexPath.row].title
+            cell.discountPriceLabel.text = "$ " + String(mainScreenView.bestSellerArray[indexPath.row].discountPrice)
+            cell.currentPriceLabel.text = "$ " + String(mainScreenView.bestSellerArray[indexPath.row].priceWithoutDiscount)
+            cell.isFavorite = mainScreenView.bestSellerArray[indexPath.row].isFavorites
+            
+            if mainScreenView.bestSellerArray[indexPath.row].isFavorites {
+                cell.isFavoriteButton.setImage(UIImage(named: "favoriteButtonClicked"), for: .normal)
+            }
+        }
         return cell
     }
     
@@ -48,9 +62,7 @@ class BestSellerCollectionView: UICollectionView, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        mainScreenView.showProductDetailsView()
-        
-        
+        mainScreenView.userSelectOpenProductDetailViewThroughCollectionView()
     }
     
 

@@ -8,10 +8,14 @@
 import UIKit
 
 protocol FilterRouterInput {
-    
+    func dismissFilterView()
 }
 
 final class FilterRouter: FilterRouterInput {
+    func dismissFilterView() {
+        rootViewController?.dismiss(animated: true)
+    }
+    
     
     weak var rootViewController: UIViewController? 
 }

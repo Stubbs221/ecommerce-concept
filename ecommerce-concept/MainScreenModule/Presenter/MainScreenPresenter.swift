@@ -5,7 +5,10 @@
 //  Created by MAC on 22.08.2022.
 //
 
-import Foundation
+import UIKit
+import ObjectMapper
+import AlamofireObjectMapper
+import Alamofire
 
 protocol MainScreenPresenterInput {
     var output: MainScreenPresenterOutput? { get set }
@@ -15,13 +18,13 @@ protocol MainScreenPresenterOutput: AnyObject{
     
 }
 
-final class MainScreenPresenter {
+class MainScreenPresenter {
     
     weak var output: MainScreenPresenterOutput?
     
-    private let interactor: MainScreenInteractorInput
-    private let router: MainScreenRouterInput
-    private let view: MainScreenViewInput
+    private var interactor: MainScreenInteractorInput
+    private var router: MainScreenRouterInput
+    private var view: MainScreenViewInput
     
     init(view: MainScreenViewInput,
          router: MainScreenRouterInput,
@@ -29,17 +32,41 @@ final class MainScreenPresenter {
         self.view = view
         self.router = router
         self.interactor = interactor
+        interactor.fetchStoreDate()
     }
 }
 
 extension MainScreenPresenter: MainScreenViewOutput {
-    func showProductDetailsView() {
-        
+    func userSelectOpenMyCartView() {
+        router.showMyCartView()
     }
     
+    func userSelectOpenProductDetailView() {
+        router.showProductDetailsView()
+    }
     
+    func userSelectOpenFilter() {
+        router.showFilterView()
+    }
 }
 
 extension MainScreenPresenter: MainScreenInteractorOutput {
+ 
+    func interactorDidFetchHomeStore(with result: Result<[HomeStoreModel], Swift.Error>) {
+        switch result {
+        case .success(let homeStoreFetchResult):
+            view.updateHomeStore(with: homeStoreFetchResult)
+        case .failure:
+            view.updateHomeStore(with: "Something went wrong")
+        }
+    }
     
+    func interactorDidFetchBestSeller(with result: Result<[BestSellerModel], Swift.Error>) {
+        switch result {
+        case .success(let bestSellerFetchResult):
+            view.updateBestSeller(with: bestSellerFetchResult)
+        case .failure:
+            view.updateBestSeller(with: "Something went wrong")
+        }
+    }
 }

@@ -11,6 +11,8 @@ class BestSellerCell: UICollectionViewCell {
     
     static let identifier = "bestSellerCell"
     
+    var isFavorite = false
+    
     lazy var background: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -28,6 +30,8 @@ class BestSellerCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.clipsToBounds = true
+//        imageView.layer.masksToBounds = true
         return imageView
     }()
     
@@ -40,6 +44,7 @@ class BestSellerCell: UICollectionViewCell {
         button.heightAnchor.constraint(equalToConstant: 26).isActive = true
         button.widthAnchor.constraint(equalToConstant: 26).isActive = true
         button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        button.addTarget(self, action: #selector(isFavoriteTapped), for: .touchUpInside)
         button.layer.masksToBounds = false
         button.layer.shadowRadius = 4
         button.layer.shadowOpacity = 0.2
@@ -92,10 +97,10 @@ class BestSellerCell: UICollectionViewCell {
             background.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)])
         
         NSLayoutConstraint.activate([
-            phoneImageView.topAnchor.constraint(equalTo: background.topAnchor, constant: 10),
-            phoneImageView.centerXAnchor.constraint(equalTo: background.centerXAnchor),
-            phoneImageView.heightAnchor.constraint(equalToConstant: 170),
-            phoneImageView.widthAnchor.constraint(equalToConstant: background.frame.width)])
+            phoneImageView.topAnchor.constraint(equalTo: background.topAnchor),
+            phoneImageView.leadingAnchor.constraint(equalTo: background.leadingAnchor, constant: 15),
+            phoneImageView.trailingAnchor.constraint(equalTo: background.trailingAnchor, constant:  -15),
+            phoneImageView.bottomAnchor.constraint(equalTo: currentPriceLabel.topAnchor, constant: -5)])
         
         NSLayoutConstraint.activate([
             isFavoriteButton.topAnchor.constraint(equalTo: background.topAnchor, constant: 11),
@@ -124,4 +129,9 @@ class BestSellerCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc func isFavoriteTapped() {
+        isFavoriteButton.setImage(UIImage(named: (isFavorite ? "favoriteButton" : "favoriteButtonClicked" )), for: .normal)
+        
+        self.isFavorite = !self.isFavorite
+    }
 }

@@ -34,6 +34,10 @@ final class MyCartPresenter {
 }
 
 extension MyCartPresenter: MyCartViewOutput {
+    func userSelectDismissView() {
+        router.dismissMyCartView()
+    }
+
     
 }
 

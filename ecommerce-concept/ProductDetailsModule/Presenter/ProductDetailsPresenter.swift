@@ -11,7 +11,7 @@ protocol ProductDetailsPresenterInput {
     var output: ProductDetailsPresenterOutput? { get set }
 }
 
-protocol ProductDetailsPresenterOutput {
+protocol ProductDetailsPresenterOutput: AnyObject {
     
 }
 
@@ -26,16 +26,44 @@ final class ProductDetailsPresenter {
     init(view: ProductDetailsViewInput,
          router: ProductDetailsRouterInput,
          interactor: ProductDetailsInteractorInput) {
+        self.interactor = interactor
+        
+  
+        interactor.fetchPhoneData()
         self.view = view
         self.router = router
-        self.interactor = interactor
+        
+        
+        
     }
 }
 
 extension ProductDetailsPresenter: ProductDetailsViewOutput {
+    func userSelectOpenMyCartViewFromProductDetailsView() {
+        router.showMyCartView()
+    }
+    
+    func userSelectDismissProductDetailsView() {
+        router.dismissProductDetailsView()
+    }
+    
+    func userSelectAddToCartButton() {
+        router.addToCartButtonSelected()
+    }
+    
     
 }
 
 extension ProductDetailsPresenter: ProductDetailsInteractorOutput {
+    func interactorDidFetchPhoneData(with result: Result<ProductDetailsFetchResult, Swift.Error>) {
+        switch result {
+        case .success(let phoneDataFetchResult):
+            view.updatePhoneData(with: phoneDataFetchResult)
+        case .failure:
+            view.updatePhoneData(with: "Something went wrong")
+            
+        }
+    }
+    
     
 }

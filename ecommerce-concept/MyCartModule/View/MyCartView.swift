@@ -9,14 +9,19 @@ import UIKit
 
 protocol MyCartViewInput {
     var output: MyCartViewOutput? { get set }
+    
+    func updateCartData(with cartData: CartData)
+    func updateCartData(with error: String)
 }
 
 protocol MyCartViewOutput {
-// change quantity of items to purchase
+
+    func userSelectDismissView()
+    
 }
 
 class MyCartView: UIViewController, MyCartViewInput {
-    var output: MyCartViewOutput?
+    var output: MyCartViewOutput? // ref to presenter
     
 
     override func viewDidLoad() {

@@ -12,7 +12,7 @@ protocol FilterViewInput {
 }
 
 protocol FilterViewOutput {
-//    add dissmiss func, done func? 6, some dropdown scrollers
+    func userSelectDismissFilterView()
 }
 
 class FilterView: UIViewController, FilterViewInput {
@@ -229,7 +229,7 @@ class FilterView: UIViewController, FilterViewInput {
     
     
     @objc func closeButtonPressed() {
-        self.dismiss(animated: true)
+        output?.userSelectDismissFilterView()
     }
     /*
      
