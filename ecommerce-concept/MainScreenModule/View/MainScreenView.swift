@@ -261,7 +261,7 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = UIColor(named: "backgroundWhiteColor")
-        scrollView.contentSize = CGSize(width: Int(UIScreen.main.bounds.width) * hotSalesArray.count - 34 * 3, height: 200)
+        scrollView.contentSize = CGSize(width: Int(UIScreen.main.bounds.width) * hotSalesArray.count , height: 200)
         scrollView.isPagingEnabled = true
         scrollView.delegate = self
         
@@ -437,13 +437,25 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         let view = UIView()
         
         view.translatesAutoresizingMaskIntoConstraints = true
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 20
+        view.backgroundColor = UIColor(named: "backgroundWhiteColor")
+//        view.layer.cornerRadius = 20
 
         guard let url = URL(string: pictureURL) else { return UIView() }
         let title = title, isNew = isNew, subTitle = subTitle
         print(title)
         print(subTitle)
+        
+        let contentView: UIView = {
+            let view = UIView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.backgroundColor = .white
+            view.layer.cornerRadius = 20
+            view.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 68).isActive = true
+//            view.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width ).isActive = true
+            view.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            return view
+        }()
+        
         let titleLabel: UILabel = {
             let label = UILabel()
             label.text = title
@@ -504,33 +516,39 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         let screenWidth = UIScreen.main.bounds.width
 
         
-        view.frame = CGRect(x: screenWidth * position - 34 * position, y: 0, width: screenWidth - 34, height: 200)
-        view.addSubview(phoneImage)
-        view.addSubview(titleLabel)
-        view.addSubview(subTitleLabel)
-        view.addSubview(buyNowButton)
+        view.frame = CGRect(x: screenWidth * position - 0 * position, y: 0, width: screenWidth , height: 200)
+        view.addSubview(contentView)
+        contentView.addSubview(phoneImage)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(subTitleLabel)
+        contentView.addSubview(buyNowButton)
+        
+        NSLayoutConstraint.activate([
+            contentView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            contentView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
         
         if isNew {
             view.addSubview(isNewLabel)
             
             NSLayoutConstraint.activate([
                 isNewLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-                isNewLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 25)])
+                isNewLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 25)])
         }
         
         NSLayoutConstraint.activate([
-            phoneImage.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            phoneImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            phoneImage.topAnchor.constraint(equalTo: view.topAnchor),
-            phoneImage.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+            phoneImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            phoneImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            phoneImage.topAnchor.constraint(equalTo: contentView.topAnchor),
+            phoneImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)])
         
         NSLayoutConstraint.activate([
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 70)])
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 70)])
         
         NSLayoutConstraint.activate([
-            buyNowButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 35),
-            buyNowButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35)])
+            buyNowButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 35),
+            buyNowButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -35)])
         
         NSLayoutConstraint.activate([
             subTitleLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
@@ -569,11 +587,6 @@ class MainScreenView: UIViewController, MainScreenViewInput {
 
 extension MainScreenView: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        pageControl.currentPage = Int(scrollView.contentOffset.x / UIScreen.main.bounds.width * 2)
+        pageControl.currentPage = Int(scrollView.contentOffset.x / UIScreen.main.bounds.width)
     }
 }
-//extension MainScreenView: MainScreenViewInput {
-//    var output: MainScreenViewInput?
-//
-//
-//}

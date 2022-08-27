@@ -87,8 +87,8 @@ extension MainScreenView {
             seeMoreLabel.topAnchor.constraint(equalTo: searchView.bottomAnchor, constant: 30)])
         
         NSLayoutConstraint.activate([
-            hotSalesScrollView.leadingAnchor.constraint(equalTo: hotSalesLabel.leadingAnchor),
-            hotSalesScrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -17),
+            hotSalesScrollView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            hotSalesScrollView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             hotSalesScrollView.topAnchor.constraint(equalTo: hotSalesLabel.bottomAnchor, constant: 20),
             hotSalesScrollView.heightAnchor.constraint(equalToConstant: 200)])
         

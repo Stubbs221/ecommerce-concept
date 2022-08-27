@@ -144,7 +144,7 @@ class MyCartView: UIViewController, MyCartViewInput {
         
         let phonePriceLabel: UILabel = {
             let label = UILabel()
-            label.text = String(cartData?.basket[0].price ?? 1)
+            label.text = "$" + String(cartData?.basket[0].price ?? 1) + ".00"
             label.translatesAutoresizingMaskIntoConstraints = false
             label.textColor = UIColor(named: "orangeColor")
             label.font = UIFont(name: "MarkPro-Medium", size: 20)
@@ -181,8 +181,8 @@ class MyCartView: UIViewController, MyCartViewInput {
             let button = UIButton()
             button.setImage(UIImage(named: "deleteItemIcon"), for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.heightAnchor.constraint(equalToConstant: 23).isActive = true
-            button.widthAnchor.constraint(equalToConstant: 23).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            button.widthAnchor.constraint(equalToConstant: 20).isActive = true
             return button
         }()
         
@@ -203,7 +203,7 @@ class MyCartView: UIViewController, MyCartViewInput {
         
         NSLayoutConstraint.activate([
             phonePriceLabel.leadingAnchor.constraint(equalTo: phoneNameLabel.leadingAnchor),
-            phonePriceLabel.topAnchor.constraint(equalTo: phoneNameLabel.bottomAnchor, constant: 30)])
+            phonePriceLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)])
         
         NSLayoutConstraint.activate([
             changeAmountView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -249,7 +249,7 @@ class MyCartView: UIViewController, MyCartViewInput {
         
         let phonePriceLabel: UILabel = {
             let label = UILabel()
-            label.text = String(cartData?.basket[1].price ?? 1)
+            label.text = "$" + String(cartData?.basket[1].price ?? 1) + ".00"
             label.translatesAutoresizingMaskIntoConstraints = false
             label.textColor = UIColor(named: "orangeColor")
             
@@ -283,8 +283,8 @@ class MyCartView: UIViewController, MyCartViewInput {
             let button = UIButton()
             button.setImage(UIImage(named: "deleteItemIcon"), for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.heightAnchor.constraint(equalToConstant: 23).isActive = true
-            button.widthAnchor.constraint(equalToConstant: 23).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            button.widthAnchor.constraint(equalToConstant: 20).isActive = true
             return button
         }()
         
@@ -305,7 +305,7 @@ class MyCartView: UIViewController, MyCartViewInput {
         
         NSLayoutConstraint.activate([
             phonePriceLabel.leadingAnchor.constraint(equalTo: phoneNameLabel.leadingAnchor),
-            phonePriceLabel.topAnchor.constraint(equalTo: phoneNameLabel.bottomAnchor, constant: 30)])
+            phonePriceLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
         
         NSLayoutConstraint.activate([
             changeAmountView.centerYAnchor.constraint(equalTo: view.centerYAnchor),

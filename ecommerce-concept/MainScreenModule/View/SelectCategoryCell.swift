@@ -15,11 +15,11 @@ class SelectCategoryCell: UICollectionViewCell {
    
     lazy var roundView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 40
+        view.layer.cornerRadius = 39
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
-        view.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        view.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 78).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 78).isActive = true
         return view
     }()
     
@@ -28,8 +28,8 @@ class SelectCategoryCell: UICollectionViewCell {
 
         image.contentMode = .scaleAspectFit
             image.translatesAutoresizingMaskIntoConstraints = false
-            image.heightAnchor.constraint(equalToConstant: 31).isActive = true
-            image.widthAnchor.constraint(equalToConstant: 31).isActive = true
+            image.heightAnchor.constraint(equalToConstant: 34).isActive = true
+            image.widthAnchor.constraint(equalToConstant: 34).isActive = true
             return image
         }()
         
