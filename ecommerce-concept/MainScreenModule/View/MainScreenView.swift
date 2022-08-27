@@ -561,6 +561,7 @@ class MainScreenView: UIViewController, MainScreenViewInput {
         self.homeStoreArray = homeStore
         print("fetching homeStore success")
         print(homeStoreArray[0].title)
+        
         hotSalesScrollView.addSubview(addPage(pictureURL: homeStoreArray[0].pictureURL, title: homeStoreArray[0].title, isNew: homeStoreArray[0].isNew, subTitle: homeStoreArray[0].subTitle, position: 0))
         hotSalesScrollView.addSubview(addPage(pictureURL: homeStoreArray[1].pictureURL, title: homeStoreArray[1].title, isNew: homeStoreArray[1].isNew, subTitle: homeStoreArray[1].subTitle, position: 1))
         hotSalesScrollView.addSubview(addPage(pictureURL: homeStoreArray[2].pictureURL, title: homeStoreArray[2].title, isNew: homeStoreArray[2].isNew, subTitle: homeStoreArray[2].subTitle, position: 2))

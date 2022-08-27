@@ -32,6 +32,7 @@ class MainScreenPresenter {
         self.view = view
         self.router = router
         self.interactor = interactor
+        
         interactor.fetchStoreDate()
     }
 }

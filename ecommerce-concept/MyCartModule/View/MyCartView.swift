@@ -25,24 +25,13 @@ protocol MyCartViewOutput {
 }
 
 class MyCartView: UIViewController, MyCartViewInput {
-    func updateCartData(with cartData: CartData) {
-        self.cartData = cartData
-        setupUI()
-        self.totalMoneyLabel.text = "$" + String(cartData.totalPrice) + " us"
-        self.deliveryCostLabel.text = cartData.delivery
-    }
-    
-    func updateCartData(with error: String) {
-        print(error)
-    }
-    
     
     var output: MyCartViewOutput? // ref to presenter
     var cartData: CartData?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,6 +100,73 @@ class MyCartView: UIViewController, MyCartViewInput {
         return view
     }()
     
+    lazy  var firstPhoneNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "name"
+        label.numberOfLines = 2
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "MarkPro-Medium", size: 20)
+        label.textColor = .white
+        return label
+    }()
+    
+    lazy var firstPhonePriceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "$0"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor(named: "orangeColor")
+        label.font = UIFont(name: "MarkPro-Medium", size: 20)
+        return label
+    }()
+    
+    lazy var firstPhoneImageView: UIImageView = {
+        let imageView = UIImageView()
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 5
+        imageView.backgroundColor = .white
+//        guard let url = URL(string: cartData?.basket[0].imageURLString ?? "" ) else { return imageView }
+//        imageView.kf.setImage(with: url)
+        imageView.layer.masksToBounds = true
+        imageView.heightAnchor.constraint(equalToConstant: 90).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        return imageView
+    }()
+    
+    lazy var secondPhoneimageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.cornerRadius = 5
+        imageView.backgroundColor = .white
+       
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
+        imageView.heightAnchor.constraint(equalToConstant: 90).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 90).isActive = true
+        return imageView
+    }()
+    
+    
+    lazy var secondPhoneNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "name"
+        label.numberOfLines = 2
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "MarkPro-Medium", size: 20)
+        label.textColor = .white
+        return label
+    }()
+    
+    lazy var secondPhonePriceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "0"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor(named: "orangeColor")
+        
+        label.font = UIFont(name: "MarkPro-Medium", size: 20)
+        return label
+    }()
+    
     lazy var firstPhoneView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -118,38 +174,9 @@ class MyCartView: UIViewController, MyCartViewInput {
         view.heightAnchor.constraint(equalToConstant: 90).isActive = true
         view.widthAnchor.constraint(equalToConstant: 350).isActive = true
         
-        let imageView: UIImageView = {
-            let imageView = UIImageView()
-            
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.layer.cornerRadius = 5
-            imageView.backgroundColor = .white
-            guard let url = URL(string: cartData?.basket[0].imageURLString ?? "" ) else { return imageView }
-            imageView.kf.setImage(with: url)
-            imageView.layer.masksToBounds = true
-            imageView.heightAnchor.constraint(equalToConstant: 90).isActive = true
-            imageView.widthAnchor.constraint(equalToConstant: 90).isActive = true
-            return imageView
-        }()
         
-        let phoneNameLabel: UILabel = {
-            let label = UILabel()
-            label.text = cartData?.basket[0].title
-            label.numberOfLines = 2
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont(name: "MarkPro-Medium", size: 20)
-            label.textColor = .white
-            return label
-        }()
         
-        let phonePriceLabel: UILabel = {
-            let label = UILabel()
-            label.text = "$" + String(cartData?.basket[0].price ?? 1) + ".00"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.textColor = UIColor(named: "orangeColor")
-            label.font = UIFont(name: "MarkPro-Medium", size: 20)
-            return label
-        }()
+       
         
         let changeAmountView: UIView = {
             let view = UIView()
@@ -186,24 +213,24 @@ class MyCartView: UIViewController, MyCartViewInput {
             return button
         }()
         
-        view.addSubview(imageView)
-        view.addSubview(phoneNameLabel)
-        view.addSubview(phonePriceLabel)
+        view.addSubview(firstPhoneImageView)
+        view.addSubview(firstPhoneNameLabel)
+        view.addSubview(firstPhonePriceLabel)
         view.addSubview(changeAmountView)
         view.addSubview(deleteItemButton)
         
         NSLayoutConstraint.activate([
-            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor)])
+            firstPhoneImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            firstPhoneImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor)])
         
         NSLayoutConstraint.activate([
-            phoneNameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
-            phoneNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            phoneNameLabel.trailingAnchor.constraint(equalTo: changeAmountView.leadingAnchor, constant: -3)])
+            firstPhoneNameLabel.leadingAnchor.constraint(equalTo: firstPhoneImageView.trailingAnchor, constant: 20),
+            firstPhoneNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            firstPhoneNameLabel.trailingAnchor.constraint(equalTo: changeAmountView.leadingAnchor, constant: -3)])
         
         NSLayoutConstraint.activate([
-            phonePriceLabel.leadingAnchor.constraint(equalTo: phoneNameLabel.leadingAnchor),
-            phonePriceLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)])
+            firstPhonePriceLabel.leadingAnchor.constraint(equalTo: firstPhoneNameLabel.leadingAnchor),
+            firstPhonePriceLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)])
         
         NSLayoutConstraint.activate([
             changeAmountView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -223,39 +250,8 @@ class MyCartView: UIViewController, MyCartViewInput {
         view.heightAnchor.constraint(equalToConstant: 90).isActive = true
         view.widthAnchor.constraint(equalToConstant: 350).isActive = true
         
-        let imageView: UIImageView = {
-            let imageView = UIImageView()
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            imageView.layer.cornerRadius = 5
-            imageView.backgroundColor = .white
-            guard let url = URL(string: cartData?.basket[1].imageURLString ?? "" ) else { return imageView }
-            imageView.kf.setImage(with: url)
-            imageView.contentMode = .scaleAspectFill
-            imageView.layer.masksToBounds = true
-            imageView.heightAnchor.constraint(equalToConstant: 90).isActive = true
-            imageView.widthAnchor.constraint(equalToConstant: 90).isActive = true
-            return imageView
-        }()
         
-        let phoneNameLabel: UILabel = {
-            let label = UILabel()
-            label.text = cartData?.basket[1].title
-            label.numberOfLines = 2
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.font = UIFont(name: "MarkPro-Medium", size: 20)
-            label.textColor = .white
-            return label
-        }()
         
-        let phonePriceLabel: UILabel = {
-            let label = UILabel()
-            label.text = "$" + String(cartData?.basket[1].price ?? 1) + ".00"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.textColor = UIColor(named: "orangeColor")
-            
-            label.font = UIFont(name: "MarkPro-Medium", size: 20)
-            return label
-        }()
         
         let changeAmountView: UIView = {
             let view = UIView()
@@ -288,24 +284,24 @@ class MyCartView: UIViewController, MyCartViewInput {
             return button
         }()
         
-        view.addSubview(imageView)
-        view.addSubview(phoneNameLabel)
-        view.addSubview(phonePriceLabel)
+        view.addSubview(secondPhoneimageView)
+        view.addSubview(secondPhoneNameLabel)
+        view.addSubview(secondPhonePriceLabel)
         view.addSubview(changeAmountView)
         view.addSubview(deleteItemButton)
         
         NSLayoutConstraint.activate([
-            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor)])
+            secondPhoneimageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            secondPhoneimageView.leadingAnchor.constraint(equalTo: view.leadingAnchor)])
         
         NSLayoutConstraint.activate([
-            phoneNameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 20),
-            phoneNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            phoneNameLabel.trailingAnchor.constraint(equalTo: changeAmountView.leadingAnchor, constant: -3)])
+            secondPhoneNameLabel.leadingAnchor.constraint(equalTo: secondPhoneimageView.trailingAnchor, constant: 20),
+            secondPhoneNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            secondPhoneNameLabel.trailingAnchor.constraint(equalTo: changeAmountView.leadingAnchor, constant: -3)])
         
         NSLayoutConstraint.activate([
-            phonePriceLabel.leadingAnchor.constraint(equalTo: phoneNameLabel.leadingAnchor),
-            phonePriceLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
+            secondPhonePriceLabel.leadingAnchor.constraint(equalTo: secondPhoneNameLabel.leadingAnchor),
+            secondPhonePriceLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
         
         NSLayoutConstraint.activate([
             changeAmountView.centerYAnchor.constraint(equalTo: view.centerYAnchor),

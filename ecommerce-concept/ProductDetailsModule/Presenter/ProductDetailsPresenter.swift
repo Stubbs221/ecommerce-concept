@@ -23,12 +23,17 @@ final class ProductDetailsPresenter {
     private let router: ProductDetailsRouterInput
     private let view: ProductDetailsViewInput
     
+    let queue1 = DispatchQueue(label: "queue1", attributes: .concurrent)
+    
     init(view: ProductDetailsViewInput,
          router: ProductDetailsRouterInput,
          interactor: ProductDetailsInteractorInput) {
         self.interactor = interactor
         
-        interactor.fetchPhoneData()
+//        queue1.async {
+            interactor.fetchPhoneData()
+//        }
+        
         self.view = view
         self.router = router
     }

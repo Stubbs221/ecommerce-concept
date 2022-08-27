@@ -28,7 +28,8 @@ final class MainScreenInteractor: MainScreenInteractorInput {
     let urlString = "https://run.mocky.io/v3/654bd15e-b121-49ba-a588-960956b15175"
     
     func fetchStoreDate() {
-        print("Start fetching")
+        print("Start fetching on thread \(Thread.current)")
+        
         guard let url = URL(string: urlString) else {
             self.output?.interactorDidFetchHomeStore(with: .failure(Error.invalidURL))
             return

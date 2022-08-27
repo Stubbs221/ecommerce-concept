@@ -9,12 +9,20 @@ import UIKit
 
 extension ProductDetailsView {
     func updatePhoneData(with phoneData: ProductDetailsFetchResult) {
+        print("Thread in update phoneData is \(Thread.current)")
         self.phoneData = phoneData
         
-        setupUI()
+        phoneNameLabel.text = phoneData.title
+        processorLabel.text = phoneData.cpu
+        cameraLabel.text = phoneData.camera
+        memoryLabel.text = phoneData.memory
+        flashMemoryLabel.text = phoneData.maxSDCapacity
+        minStorageCapacityButton.setTitle(phoneData.capacity[0] + " gb", for: .normal)
+        maxStorageCapacityButton.setTitle(phoneData.capacity[1] + " gb", for: .normal)
         phoneImagesScrollView.addSubview(addPage(photoStringURL: phoneData.imagesStringURL[0], position: 0))
         phoneImagesScrollView.addSubview(addPage(photoStringURL: phoneData.imagesStringURL[1], position: 1))
         isFavorite = phoneData.isFavorites
+        
         addToFavoriteButton.setImage(UIImage(named: (isFavorite ? "favoriteButtonClicked" : "favoriteTabBarButton" )), for: .normal)
     }
     

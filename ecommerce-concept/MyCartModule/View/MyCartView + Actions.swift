@@ -8,6 +8,27 @@
 import UIKit
 
 extension MyCartView {
+    
+    func updateCartData(with cartData: CartData) {
+        self.cartData = cartData
+        guard let urlOne = URL(string: cartData.basket[0].imageURLString) else { return }
+        guard let urlTwo = URL(string: cartData.basket[1].imageURLString) else { return }
+        firstPhoneImageView.kf.setImage(with: urlOne)
+        secondPhoneimageView.kf.setImage(with: urlTwo)
+        firstPhoneNameLabel.text = cartData.basket[0].title
+        firstPhonePriceLabel.text = "$" + String(cartData.basket[0].price) + ".00"
+        secondPhoneNameLabel.text = cartData.basket[1].title
+        secondPhonePriceLabel.text = "$" + String(cartData.basket[1].price) + ".00"
+        
+      
+        self.totalMoneyLabel.text = "$" + String(cartData.totalPrice) + " us"
+        self.deliveryCostLabel.text = cartData.delivery
+    }
+    
+    func updateCartData(with error: String) {
+        print(error)
+    }
+    
     @objc func increaseItemsInCartByOne(_ sender: Any) {
         ItemsInCart.shared.increaseItems()
         guard let sender = sender as? UIButton else { return }

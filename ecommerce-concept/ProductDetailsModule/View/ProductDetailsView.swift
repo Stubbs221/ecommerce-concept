@@ -33,7 +33,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupUI()
         // Do any additional setup after loading the view.
     }
     
@@ -251,6 +251,43 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         return view
     }()
 
+    lazy var processorLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "MarkPro", size: 13)
+        label.textColor = UIColor.lightGray
+//        print("cpu name is \(phoneData?.cpu)")
+        label.text = "processor"
+        
+        return label
+    }()
+    
+    lazy var memoryLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "MarkPro", size: 13)
+        label.textColor = UIColor.lightGray
+        label.text = "memory"
+        return label
+    }()
+    
+    lazy var cameraLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "MarkPro", size: 13)
+        label.textColor = UIColor.lightGray
+        label.text = "camera"
+        return label
+    }()
+    
+    lazy var flashMemoryLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "MarkPro", size: 13)
+        label.textColor = UIColor.lightGray
+        label.text = "flashMemory"
+        return label
+    }()
     
     lazy var hardwareStackView: UIStackView = {
         
@@ -270,24 +307,15 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
                 return imageView
             }()
             
-            let label: UILabel = {
-                let label = UILabel()
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.font = UIFont(name: "MarkPro", size: 13)
-                label.textColor = UIColor.lightGray
-                print("cpu name is \(self.phoneData?.cpu)")
-                label.text = self.phoneData?.cpu
-                
-                return label
-            }()
+            
             view.addSubview(imageView)
-            view.addSubview(label)
+            view.addSubview(processorLabel)
             
             NSLayoutConstraint.activate([
                 imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 3)
+                processorLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                processorLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 3)
                 ])
             return view
         }()
@@ -308,22 +336,15 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
                 return imageView
             }()
             
-            let label: UILabel = {
-                let label = UILabel()
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.font = UIFont(name: "MarkPro", size: 13)
-                label.textColor = UIColor.lightGray
-                label.text = phoneData?.camera
-                return label
-            }()
+           
             view.addSubview(imageView)
-            view.addSubview(label)
+            view.addSubview(cameraLabel)
             
             NSLayoutConstraint.activate([
                 imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5)
+                cameraLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                cameraLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5)
                 ])
             return view
         }()
@@ -344,22 +365,15 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
                 return imageView
             }()
             
-            let label: UILabel = {
-                let label = UILabel()
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.font = UIFont(name: "MarkPro", size: 13)
-                label.textColor = UIColor.lightGray
-                label.text = phoneData?.memory
-                return label
-            }()
+            
             view.addSubview(imageView)
-            view.addSubview(label)
+            view.addSubview(memoryLabel)
             
             NSLayoutConstraint.activate([
                 imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5)
+                memoryLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                memoryLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5)
                 ])
             return view
         }()
@@ -380,22 +394,15 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
                 return imageView
             }()
             
-            let label: UILabel = {
-                let label = UILabel()
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.font = UIFont(name: "MarkPro", size: 13)
-                label.textColor = UIColor.lightGray
-                label.text = phoneData?.maxSDCapacity
-                return label
-            }()
+            
             view.addSubview(imageView)
-            view.addSubview(label)
+            view.addSubview(flashMemoryLabel)
             
             NSLayoutConstraint.activate([
                 imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5)
+                flashMemoryLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                flashMemoryLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5)
                 ])
             return view
         }()
