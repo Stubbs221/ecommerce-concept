@@ -37,6 +37,7 @@ final class ProductDetailsInteractor: ProductDetailsInteractorInput {
             return
         }
         AF.request(url).responseObject { (response: AFDataResponse<ProductDetailsFetchResult>) in
+//            print("AF request was made on \(Thread.current) thread")
             switch response.result {
             case .success(let fetchResult):
                 self.output?.interactorDidFetchPhoneData(with: .success(fetchResult))

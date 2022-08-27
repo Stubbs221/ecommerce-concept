@@ -22,6 +22,8 @@ class MainScreenPresenter {
     
     weak var output: MainScreenPresenterOutput?
     
+    var queue1 = DispatchQueue(label: "queue1", qos: .userInitiated, attributes: .concurrent)
+    
     private var interactor: MainScreenInteractorInput
     private var router: MainScreenRouterInput
     private var view: MainScreenViewInput
@@ -33,7 +35,10 @@ class MainScreenPresenter {
         self.router = router
         self.interactor = interactor
         
-        interactor.fetchStoreDate()
+        queue1.async {
+            interactor.fetchStoreDate()
+        }
+        
     }
 }
 

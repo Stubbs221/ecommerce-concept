@@ -20,6 +20,8 @@ final class MyCartPresenter {
     
     weak var output: MyCartPresenterOutput?
     
+    var queue3 = DispatchQueue(label: "queue3", qos: .userInitiated, attributes: .concurrent)
+    
     private let interactor: MyCartInteractorInput
     private let router: MyCartRouterInput
     private let view: MyCartViewInput
@@ -31,7 +33,11 @@ final class MyCartPresenter {
         self.view = view
         self.router = router
         self.interactor = interactor
-        interactor.fetchCartData()
+        
+        queue3.async {
+            interactor.fetchCartData()
+        }
+        
     }
 }
 
