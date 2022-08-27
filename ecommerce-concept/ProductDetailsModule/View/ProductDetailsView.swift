@@ -19,29 +19,32 @@ protocol ProductDetailsViewOutput {
     func userSelectDismissProductDetailsView()
     func userSelectAddToCartButton()
     func userSelectOpenMyCartViewFromProductDetailsView()
-    
+    func userSelectReturnItemsInCartCount() -> Int
 }
 
 class ProductDetailsView: UIViewController, ProductDetailsViewInput {
     
     var output: ProductDetailsViewOutput?
     
-    var phoneData: ProductDetailsFetchResult? = nil
-    var photoArray: [String] = ["Photo1", "Photo2"]
+    var phoneData: ProductDetailsFetchResult?
     var isBlueColorClicked: Bool = false
     var isFavorite: Bool = false
+    
+//    MARK: Lifecycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        itemsInCartLabel.text = String(ItemsInCart.shared.getItemsCount())
-        ItemsInCart.shared.getItemsCount() == 0 ? (itemsInCartLabel.isHidden = true) :  (itemsInCartLabel.isHidden = false)
+        guard let itemsInCart = output?.userSelectReturnItemsInCartCount() else { return }
+        itemsInCartLabel.text = String(itemsInCart)
+        itemsInCart == 0 ? (itemsInCartLabel.isHidden = true) :  (itemsInCartLabel.isHidden = false)
     }
+    
+//    MARK: UI Elements
     
     lazy var productDetailsHeaderLabel: UILabel = {
         let label = UILabel()
@@ -98,7 +101,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = UIColor(named: "backgroundWhiteColor")
-        scrollView.contentSize = CGSize(width: Int(UIScreen.main.bounds.width) * photoArray.count - 34 , height: 350)
+        scrollView.contentSize = CGSize(width: Int(UIScreen.main.bounds.width) * 2 - 34 , height: 350)
         scrollView.isPagingEnabled = true
         scrollView.delegate = self
         scrollView.showsHorizontalScrollIndicator = false
@@ -256,9 +259,7 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "MarkPro", size: 13)
         label.textColor = UIColor.lightGray
-//        print("cpu name is \(phoneData?.cpu)")
         label.text = "processor"
-        
         return label
     }()
     
@@ -306,7 +307,6 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
                 imageView.widthAnchor.constraint(equalToConstant: 32).isActive = true
                 return imageView
             }()
-            
             
             view.addSubview(imageView)
             view.addSubview(processorLabel)
@@ -485,8 +485,8 @@ class ProductDetailsView: UIViewController, ProductDetailsViewInput {
         button.layer.cornerRadius = 10
         button.heightAnchor.constraint(equalToConstant: 60).isActive = true
         button.widthAnchor.constraint(equalToConstant: 370).isActive = true
-        guard let price = phoneData?.price else { return button }
-        button.setTitle("Add to Cart    $\(price)", for: .normal)
+        
+        button.setTitle("Add to cart", for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "MarkPro-Bold", size: 23)
         button.addTarget(self, action: #selector(addToCartTapped), for: .touchUpInside)

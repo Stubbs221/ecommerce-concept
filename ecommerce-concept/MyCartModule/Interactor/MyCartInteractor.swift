@@ -13,6 +13,9 @@ import ObjectMapper
 protocol MyCartInteractorInput {
     var output: MyCartInteractorOutput? { get set }
     func fetchCartData()
+    func increaseItemsInCartCount()
+    func decreaseItemsInCartCount()
+    func returnItemsInCartCount() -> Int
 }
 
 protocol MyCartInteractorOutput: AnyObject {
@@ -20,7 +23,8 @@ protocol MyCartInteractorOutput: AnyObject {
 }
 
 final class MyCartInteractor: MyCartInteractorInput {
- 
+    
+    
     
     var output: MyCartInteractorOutput?
     
@@ -42,4 +46,19 @@ final class MyCartInteractor: MyCartInteractorInput {
             }
         }
     }
+    
+    func increaseItemsInCartCount() {
+        ItemsInCart.shared.increaseItems()
+    }
+    
+    func decreaseItemsInCartCount() {
+        if ItemsInCart.shared.getItemsCount() > 1 {
+            ItemsInCart.shared.decreaseItems()
+        }
+    }
+    
+    func returnItemsInCartCount() -> Int {
+        ItemsInCart.shared.getItemsCount()
+    }
+    
 }

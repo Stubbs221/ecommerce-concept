@@ -21,14 +21,19 @@ protocol MyCartViewOutput {
     
     
     func userSelectDismissView(itemsInCart: Int)
-    
+    func userSelectIncraeseItemsInCartCount()
+    func userSelectDecreaseItemsInCartCount()
+    func userSelectReturnItemsInCartCount() -> Int
+
 }
 
 class MyCartView: UIViewController, MyCartViewInput {
     
     var output: MyCartViewOutput? // ref to presenter
     var cartData: CartData?
-
+    
+// MARK: Lifecycle functioins
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -37,16 +42,19 @@ class MyCartView: UIViewController, MyCartViewInput {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let itemsInView = (Int(amountLabelOfSecondPhone.text ?? "") ?? 0) + (Int(amountLabelOfFirstPhone.text ?? "") ?? 0)
-        if itemsInView > ItemsInCart.shared.getItemsCount() {
-            for i in (ItemsInCart.shared.getItemsCount())..<itemsInView {
-                ItemsInCart.shared.increaseItems()
+        guard let itemsInCart = output?.userSelectReturnItemsInCartCount() else { return }
+        if itemsInView > itemsInCart {
+            for _ in itemsInCart..<itemsInView {
+                output?.userSelectIncraeseItemsInCartCount()
             }
         } else {
-            for i in itemsInView..<(ItemsInCart.shared.getItemsCount()) {
-                ItemsInCart.shared.decreaseItems()
+            for _ in itemsInView..<itemsInCart {
+                output?.userSelectDecreaseItemsInCartCount()
             }
         }
     }
+    
+//    MARK: UI ELEMENTS
     
     lazy var backButton: UIButton = {
         let button = UIButton()

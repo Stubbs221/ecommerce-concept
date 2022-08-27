@@ -21,6 +21,7 @@ extension ProductDetailsView {
         maxStorageCapacityButton.setTitle(phoneData.capacity[1] + " gb", for: .normal)
         phoneImagesScrollView.addSubview(addPage(photoStringURL: phoneData.imagesStringURL[0], position: 0))
         phoneImagesScrollView.addSubview(addPage(photoStringURL: phoneData.imagesStringURL[1], position: 1))
+        addToCartButton.setTitle("Add to cart   $\(phoneData.price).00", for: .normal)
         isFavorite = phoneData.isFavorites
         
         addToFavoriteButton.setImage(UIImage(named: (isFavorite ? "favoriteButtonClicked" : "favoriteTabBarButton" )), for: .normal)
@@ -82,8 +83,9 @@ extension ProductDetailsView {
     }
     
     @objc func addToCartTapped() {
-        ItemsInCart.shared.increaseItems()
-        itemsInCartLabel.text = String(ItemsInCart.shared.getItemsCount())
+        output?.userSelectAddToCartButton()
+        guard let itemsInCart = output?.userSelectReturnItemsInCartCount() else { return }
+        itemsInCartLabel.text = String(itemsInCart)
         itemsInCartLabel.isHidden = false
     }
     @objc func selectColorButtonTapped(_ sender: Any) {

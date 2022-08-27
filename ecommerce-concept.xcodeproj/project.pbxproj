@@ -48,6 +48,8 @@
 		04CF224B28B91E080016BBCA /* MyCartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF224A28B91E080016BBCA /* MyCartModel.swift */; };
 		04CF224F28B940AE0016BBCA /* ItemsInCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF224E28B940AE0016BBCA /* ItemsInCart.swift */; };
 		04CF225128B94FB20016BBCA /* MyCartView + Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF225028B94FB20016BBCA /* MyCartView + Actions.swift */; };
+		04CF227328BAA5FA0016BBCA /* MainScreenView + Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF227228BAA5FA0016BBCA /* MainScreenView + Actions.swift */; };
+		04CF227528BAA78C0016BBCA /* FilterView + Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF227428BAA78C0016BBCA /* FilterView + Actions.swift */; };
 		8031DE7810AF0701525ADA79 /* Pods_ecommerce_concept.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EEEFEC39DE8562F50866420 /* Pods_ecommerce_concept.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,8 @@
 		04CF224A28B91E080016BBCA /* MyCartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCartModel.swift; sourceTree = "<group>"; };
 		04CF224E28B940AE0016BBCA /* ItemsInCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsInCart.swift; sourceTree = "<group>"; };
 		04CF225028B94FB20016BBCA /* MyCartView + Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyCartView + Actions.swift"; sourceTree = "<group>"; };
+		04CF227228BAA5FA0016BBCA /* MainScreenView + Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainScreenView + Actions.swift"; sourceTree = "<group>"; };
+		04CF227428BAA78C0016BBCA /* FilterView + Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterView + Actions.swift"; sourceTree = "<group>"; };
 		645200CA79B06AD5DF3A6154 /* Pods-ecommerce-concept.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce-concept.debug.xcconfig"; path = "Target Support Files/Pods-ecommerce-concept/Pods-ecommerce-concept.debug.xcconfig"; sourceTree = "<group>"; };
 		9EEEFEC39DE8562F50866420 /* Pods_ecommerce_concept.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ecommerce_concept.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C48AE7A004E8873BA2D1E254 /* Pods-ecommerce-concept.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce-concept.release.xcconfig"; path = "Target Support Files/Pods-ecommerce-concept/Pods-ecommerce-concept.release.xcconfig"; sourceTree = "<group>"; };
@@ -292,6 +296,7 @@
 			children = (
 				04CF21D428B3CABF0016BBCA /* MainScreenView.swift */,
 				04CF21DF28B408480016BBCA /* MainScreenView + SetupUI.swift */,
+				04CF227228BAA5FA0016BBCA /* MainScreenView + Actions.swift */,
 				04CF21E228B60FC60016BBCA /* SelectCategoryCollectionView.swift */,
 				04CF21E428B610C20016BBCA /* SelectCategoryCell.swift */,
 				04CF21EA28B67AE20016BBCA /* BestSellerCollectionView.swift */,
@@ -352,6 +357,7 @@
 			children = (
 				04CF220128B7C5DA0016BBCA /* FilterView.swift */,
 				04CF220B28B7D4A10016BBCA /* FilterView + SetupUI.swift */,
+				04CF227428BAA78C0016BBCA /* FilterView + Actions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -521,11 +527,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04CF227328BAA5FA0016BBCA /* MainScreenView + Actions.swift in Sources */,
 				04CF224F28B940AE0016BBCA /* ItemsInCart.swift in Sources */,
 				04CF221428B7E6E90016BBCA /* MyCartInteractor.swift in Sources */,
 				04CF220E28B7E47D0016BBCA /* MyCartRouter.swift in Sources */,
 				04CF21D928B3CDBB0016BBCA /* MainScreenInteractor.swift in Sources */,
 				04CF225128B94FB20016BBCA /* MyCartView + Actions.swift in Sources */,
+				04CF227528BAA78C0016BBCA /* FilterView + Actions.swift in Sources */,
 				04CF217A28B37E550016BBCA /* AppDelegate.swift in Sources */,
 				04CF21D728B3CCA70016BBCA /* MainScreenPresenter.swift in Sources */,
 				04CF21F928B763FA0016BBCA /* ProductDetailsView + SetupUI.swift in Sources */,

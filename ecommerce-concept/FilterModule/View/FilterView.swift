@@ -23,8 +23,9 @@ class FilterView: UIViewController, FilterViewInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        // Do any additional setup after loading the view.
     }
+    
+//    MARK: UI Elements
     
     lazy var filterHalfScreenView: UIView = {
         let view = UIView()
@@ -226,19 +227,5 @@ class FilterView: UIViewController, FilterViewInput {
     }()
     
     
-    @objc func closeButtonPressed() {
-        output?.userSelectDismissFilterView()
-    }
-    /*
-     
-     
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

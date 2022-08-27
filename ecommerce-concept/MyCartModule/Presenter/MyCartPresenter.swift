@@ -36,12 +36,25 @@ final class MyCartPresenter {
 }
 
 extension MyCartPresenter: MyCartViewOutput {
+    func userSelectReturnItemsInCartCount() -> Int {
+        interactor.returnItemsInCartCount() 
+    }
+    
+    func userSelectIncraeseItemsInCartCount() {
+        interactor.increaseItemsInCartCount()
+    }
+    
+    func userSelectDecreaseItemsInCartCount() {
+        interactor.decreaseItemsInCartCount()
+    }
+    
     func userSelectDismissView(itemsInCart: Int) {
         router.dismissMyCartView(itemsInCart: itemsInCart)
     }
 }
 
 extension MyCartPresenter: MyCartInteractorOutput {
+    
     func interactorDidFetchCartData(with result: (Result<CartData, Swift.Error>)) {
         switch result {
         case .success(let cartDataFetchResult):

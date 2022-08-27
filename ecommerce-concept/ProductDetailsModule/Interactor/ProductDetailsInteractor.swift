@@ -13,13 +13,18 @@ import ObjectMapper
 protocol ProductDetailsInteractorInput {
     var output: ProductDetailsInteractorOutput? { get set }
     func fetchPhoneData()
+    func returnItemsInCartCount() -> Int
+    func increaseItemsInCart()
+    
 }
 
 protocol ProductDetailsInteractorOutput: AnyObject {
     func interactorDidFetchPhoneData(with result: Result<ProductDetailsFetchResult, Swift.Error>)
+    
 }
 
 final class ProductDetailsInteractor: ProductDetailsInteractorInput {
+    
     
     weak var output: ProductDetailsInteractorOutput?
     
@@ -40,4 +45,13 @@ final class ProductDetailsInteractor: ProductDetailsInteractorInput {
             }
         }
     }
+    
+    func returnItemsInCartCount() -> Int {
+        ItemsInCart.shared.getItemsCount()
+    }
+    
+    func increaseItemsInCart() {
+        ItemsInCart.shared.increaseItems()
+    }
+    
 }

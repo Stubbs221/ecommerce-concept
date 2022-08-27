@@ -30,7 +30,7 @@ extension MyCartView {
     }
     
     @objc func increaseItemsInCartByOne(_ sender: Any) {
-        ItemsInCart.shared.increaseItems()
+        output?.userSelectIncraeseItemsInCartCount()
         guard let sender = sender as? UIButton else { return }
         if sender === increaseAmountButtonTwo {
             amountLabelOfFirstPhone.text = String((Int(amountLabelOfFirstPhone.text ?? "") ?? 0) + 1)
@@ -40,10 +40,11 @@ extension MyCartView {
     }
     
     @objc func decreaseItemsInCartByOne(_ sender: Any) {
-        if ItemsInCart.shared.getItemsCount() == 0 {
+        guard let itemsInCart = output?.userSelectReturnItemsInCartCount() else { return }
+        if itemsInCart == 0 {
             return
         }
-        ItemsInCart.shared.decreaseItems()
+        output?.userSelectDecreaseItemsInCartCount()
         
         guard let sender = sender as? UIButton else { return }
         if sender === decreaseAmountButtonTwo {
@@ -54,6 +55,7 @@ extension MyCartView {
         if (Int(amountLabelOfSecondPhone.text ?? "") ?? 0) == 0 { return }
         amountLabelOfSecondPhone.text = String((Int(amountLabelOfSecondPhone.text ?? "") ?? 0) - 1)
     }
+    
     @objc func backButtonTapped() {
         output?.userSelectDismissView(itemsInCart: 0)
     }

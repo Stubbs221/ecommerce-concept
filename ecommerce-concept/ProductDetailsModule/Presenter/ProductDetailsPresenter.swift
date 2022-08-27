@@ -30,9 +30,7 @@ final class ProductDetailsPresenter {
          interactor: ProductDetailsInteractorInput) {
         self.interactor = interactor
         
-//        queue1.async {
-            interactor.fetchPhoneData()
-//        }
+        interactor.fetchPhoneData()
         
         self.view = view
         self.router = router
@@ -40,6 +38,10 @@ final class ProductDetailsPresenter {
 }
 
 extension ProductDetailsPresenter: ProductDetailsViewOutput {
+    func userSelectReturnItemsInCartCount() -> Int {
+        interactor.returnItemsInCartCount()
+    }
+    
     func userSelectOpenMyCartViewFromProductDetailsView() {
         router.showMyCartView()
     }
@@ -49,7 +51,7 @@ extension ProductDetailsPresenter: ProductDetailsViewOutput {
     }
     
     func userSelectAddToCartButton() {
-        router.addToCartButtonSelected()
+        interactor.increaseItemsInCart()
     }
     
     
