@@ -20,4 +20,4 @@ pod install
 
 | App preview | 
 | ------------- |
-| <img src="https://user-images.githubusercontent.com/44157132/187065876-7f0b8346-75b5-4cee-a467-03caa57cafb5.gif" alt="drawing" width="400"/> |
+| <img src="https://user-images.githubusercontent.com/44157132/187066204-11e7f890-2bef-45f3-a510-cd9d5650ba8c.gif" alt="drawing" width="400"/> |
