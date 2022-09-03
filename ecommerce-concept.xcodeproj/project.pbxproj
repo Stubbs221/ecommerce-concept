@@ -50,6 +50,8 @@
 		04CF225128B94FB20016BBCA /* MyCartView + Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF225028B94FB20016BBCA /* MyCartView + Actions.swift */; };
 		04CF227328BAA5FA0016BBCA /* MainScreenView + Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF227228BAA5FA0016BBCA /* MainScreenView + Actions.swift */; };
 		04CF227528BAA78C0016BBCA /* FilterView + Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CF227428BAA78C0016BBCA /* FilterView + Actions.swift */; };
+		1B809F9228C3E4EB000D639A /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B809F9128C3E4EB000D639A /* PresentationController.swift */; };
+		1B809F9428C3E721000D639A /* PanelTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B809F9328C3E721000D639A /* PanelTransition.swift */; };
 		8031DE7810AF0701525ADA79 /* Pods_ecommerce_concept.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EEEFEC39DE8562F50866420 /* Pods_ecommerce_concept.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +101,8 @@
 		04CF225028B94FB20016BBCA /* MyCartView + Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyCartView + Actions.swift"; sourceTree = "<group>"; };
 		04CF227228BAA5FA0016BBCA /* MainScreenView + Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainScreenView + Actions.swift"; sourceTree = "<group>"; };
 		04CF227428BAA78C0016BBCA /* FilterView + Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FilterView + Actions.swift"; sourceTree = "<group>"; };
+		1B809F9128C3E4EB000D639A /* PresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		1B809F9328C3E721000D639A /* PanelTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelTransition.swift; sourceTree = "<group>"; };
 		645200CA79B06AD5DF3A6154 /* Pods-ecommerce-concept.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce-concept.debug.xcconfig"; path = "Target Support Files/Pods-ecommerce-concept/Pods-ecommerce-concept.debug.xcconfig"; sourceTree = "<group>"; };
 		9EEEFEC39DE8562F50866420 /* Pods_ecommerce_concept.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ecommerce_concept.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C48AE7A004E8873BA2D1E254 /* Pods-ecommerce-concept.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce-concept.release.xcconfig"; path = "Target Support Files/Pods-ecommerce-concept/Pods-ecommerce-concept.release.xcconfig"; sourceTree = "<group>"; };
@@ -356,8 +360,10 @@
 			isa = PBXGroup;
 			children = (
 				04CF220128B7C5DA0016BBCA /* FilterView.swift */,
+				1B809F9128C3E4EB000D639A /* PresentationController.swift */,
 				04CF220B28B7D4A10016BBCA /* FilterView + SetupUI.swift */,
 				04CF227428BAA78C0016BBCA /* FilterView + Actions.swift */,
+				1B809F9328C3E721000D639A /* PanelTransition.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -530,6 +536,7 @@
 				04CF227328BAA5FA0016BBCA /* MainScreenView + Actions.swift in Sources */,
 				04CF224F28B940AE0016BBCA /* ItemsInCart.swift in Sources */,
 				04CF221428B7E6E90016BBCA /* MyCartInteractor.swift in Sources */,
+				1B809F9428C3E721000D639A /* PanelTransition.swift in Sources */,
 				04CF220E28B7E47D0016BBCA /* MyCartRouter.swift in Sources */,
 				04CF21D928B3CDBB0016BBCA /* MainScreenInteractor.swift in Sources */,
 				04CF225128B94FB20016BBCA /* MyCartView + Actions.swift in Sources */,
@@ -562,6 +569,7 @@
 				04CF21F528B6C1580016BBCA /* ProductDetailsRouter.swift in Sources */,
 				04CF221828B7F28F0016BBCA /* MyCartModuleBuilder.swift in Sources */,
 				04CF220228B7C5DA0016BBCA /* FilterView.swift in Sources */,
+				1B809F9228C3E4EB000D639A /* PresentationController.swift in Sources */,
 				04CF217C28B37E550016BBCA /* SceneDelegate.swift in Sources */,
 				04CF220428B7C65F0016BBCA /* FilterInteractor.swift in Sources */,
 				04CF21E528B610C20016BBCA /* SelectCategoryCell.swift in Sources */,

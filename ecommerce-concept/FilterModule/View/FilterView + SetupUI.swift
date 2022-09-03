@@ -9,6 +9,7 @@ import UIKit
 
 extension FilterView {
     func setupUI() {
+        view.backgroundColor = UIColor(white: 0, alpha: 0.3)
         view.addSubview(filterHalfScreenView)
         filterHalfScreenView.addSubview(closeFilterButton)
         filterHalfScreenView.addSubview(filterOptionsLabel)

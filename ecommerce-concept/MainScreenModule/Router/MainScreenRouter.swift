@@ -21,9 +21,18 @@ final class MainScreenRouter: MainScreenRouterInput {
     }
     
     func showFilterView() {
-        let vc = FilterModuleBuilder.buildFilterModule()
-        vc.modalPresentationStyle = .overCurrentContext
-        rootViewController?.present(vc, animated: true, completion: nil)
+        let child = FilterModuleBuilder.buildFilterModule()
+        
+        let transition = PanelTransition()
+        
+        child.transitioningDelegate = transition
+        child.modalPresentationStyle = .custom
+        
+        rootViewController?.present(child, animated: true)
+        
+//        let vc = FilterModuleBuilder.buildFilterModule()
+//        vc.modalPresentationStyle = .overCurrentContext
+//        rootViewController?.present(vc, animated: true, completion: nil)
     }
     
     func showMyCartView() {
